@@ -1,8 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "npm install --prefix raw-to-finest-updated",
-  "buildCommand": "npm run build --prefix raw-to-finest-updated",
-  "outputDirectory": "raw-to-finest-updated/dist",
   "rewrites": [
     {
       "source": "/(.*)",
@@ -10,3 +7,4 @@
     }
   ]
 }
+
