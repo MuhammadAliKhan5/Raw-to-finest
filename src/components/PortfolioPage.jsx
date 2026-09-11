@@ -1,10 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import podcastReel from "../assets/portfolio/portfolio-1.mp4";
-import videoEdit from "../assets/portfolio/portfolio-2.mp4";
-import promoVideo from "../assets/portfolio/portfolio-3.mp4";
-import anotherVideo1 from "../assets/portfolio/portfolio-4.mp4";
-import anotherVideo2 from "../assets/portfolio/portfolio-5.mp4";
-import anotherVideo3 from "../assets/portfolio/portfolio-6.mp4";
 import { motion } from "framer-motion";
 import {
   ArrowUpRight,
@@ -131,32 +125,32 @@ const graphicDesignItems = [
 
 const videoEditItems = [
   {
-    src: podcastReel,
+    src: "https://www.pexels.com/download/video/15821942/",
     title: "Podcast reel",
     tag: "PODCAST CUT",
   },
   {
-    src: promoVideo,
+    src: "https://www.pexels.com/download/video/33812576/",
     title: "Brand reel",
     tag: "SOCIAL EDIT",
   },
   {
-    src: videoEdit,
+    src: "https://www.pexels.com/download/video/7103634/",
     title: "Founder story",
     tag: "TALKING HEAD",
   },
   {
-    src: anotherVideo1,
+    src: "https://www.pexels.com/download/video/33891312/",
     title: "Product edit",
     tag: "PRODUCT CUT",
   },
   {
-    src: anotherVideo2,
+    src: "https://www.pexels.com/download/video/38369995/",
     title: "Lifestyle reel",
     tag: "LIFESTYLE",
   },
   {
-    src: anotherVideo3,
+    src: "https://www.pexels.com/download/video/33891300/",
     title: "Campaign cut",
     tag: "CAMPAIGN",
   }
