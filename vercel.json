@@ -1,19 +1,12 @@
 {
-<<<<<<< HEAD
-=======
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "installCommand": "npm install --prefix raw-to-finest-updated",
   "buildCommand": "npm run build --prefix raw-to-finest-updated",
   "outputDirectory": "raw-to-finest-updated/dist",
->>>>>>> 358b1fa048f7fa22575d6aca8c7353957c72705e
   "rewrites": [
     {
       "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 358b1fa048f7fa22575d6aca8c7353957c72705e
