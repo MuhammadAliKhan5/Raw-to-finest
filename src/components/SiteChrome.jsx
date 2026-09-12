@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { GsapCharReveal } from "./effects/GsapKit";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -24,6 +25,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Clock3,
+  Mail,
   Menu,
   ShieldCheck,
   Sparkles,
@@ -782,7 +784,7 @@ export function Header({ active = "/", onBook }) {
               className="label-mono flex items-center gap-2 pr-1 tracking-[0.13em] text-white/65 transition hover:text-[var(--champagne)]"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-[var(--champagne)] shadow-[0_0_10px_var(--champagne)]" />
-              +92 300 1234567
+              +92 318 3390127
             </a>
             <MagneticButton onClick={onBook}>
               Book a consultation
@@ -849,10 +851,6 @@ export function Header({ active = "/", onBook }) {
   );
 }
 
-/* ---------------------------------------------------------------------- */
-/*  FOOTER — identical on every page                                     */
-/* ---------------------------------------------------------------------- */
-
 export function Footer({ onBook }) {
   return (
     <footer id="site-footer" className="relative overflow-hidden bg-[#020104] px-3 pb-3 pt-10 text-white md:px-5 md:pb-5">
@@ -907,14 +905,18 @@ export function Footer({ onBook }) {
               dependable, premium output every week, not once a quarter.
             </p>
             <div className="mt-7 flex gap-3">
-              {["IG", "in", "TT"].map((label, i) => (
+              {[
+                { label: "Instagram", href: "https://www.instagram.com/r2fstudios_?stkn=MTA0enQ4Y2F1eWJlNA%3D%3D&utm_source=qr", Icon: FaInstagram },
+                { label: "Facebook", href: "https://www.facebook.com/share/19wQq1eo7b/", Icon: FaFacebookF },
+                { label: "Email", href: "info@r2fstudios.com", Icon: Mail },
+              ].map(({ label, href, Icon }) => (
                 <a
-                  key={label + i}
-                  href="#home"
-                  aria-label={label === "IG" ? "Instagram" : label === "in" ? "LinkedIn" : "TikTok"}
+                  key={label}
+                  href={href}
+                  aria-label={label}
                   className="label-mono flex h-11 w-11 items-center justify-center rounded-full border border-[var(--orchid)]/20 bg-[#07133f] text-white/70 transition hover:border-[var(--orchid)] hover:bg-[var(--violet)] hover:text-white"
                 >
-                  {label}
+                  <Icon size={17} aria-hidden="true" />
                 </a>
               ))}
             </div>
@@ -945,11 +947,11 @@ export function Footer({ onBook }) {
           <div>
             <div className="label-mono mb-6 tracking-[0.16em] text-[var(--champagne)]">Contact</div>
             <div className="space-y-4 text-base text-white/68">
-              <a href="mailto:hello@rawtofiness.com" className="footer-link block transition hover:text-white">
-                hello@rawtofiness.com
+              <a href="mailto:info@r2fstudios.com" className="footer-link block transition hover:text-white">
+                info@r2fstudios.com
               </a>
               <a href="tel:+923001234567" className="footer-link block transition hover:text-white">
-                +92 300 1234567
+                +92 318 3390127
               </a>
               <span className="block text-white/25">Mon — Fri · Online</span>
             </div>
@@ -967,10 +969,6 @@ export function Footer({ onBook }) {
     </footer>
   );
 }
-
-/* ---------------------------------------------------------------------- */
-/*  STICKY BOTTOM CTA                                                    */
-/* ---------------------------------------------------------------------- */
 
 export function StickyCTA({ onBook }) {
   return (

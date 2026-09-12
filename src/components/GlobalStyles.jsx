@@ -663,8 +663,13 @@ export default function GlobalStyles() {
             background-image: linear-gradient(rgba(168,85,247,.055) 1px,transparent 1px), linear-gradient(90deg,rgba(168,85,247,.055) 1px,transparent 1px) !important;
           }
 
-          /* Landing page: transparent, light-built hero with a liquid wordmark. */
-          .r2f-hero { background: transparent !important; isolation: isolate; }
+          /* Landing hero: reference-led type hierarchy and rock-to-mark reveal. */
+          .r2f-hero {
+            background:
+              radial-gradient(ellipse 45% 28% at 50% 58%,rgba(98,35,196,.095),transparent 76%),
+              #020104 !important;
+            isolation: isolate;
+          }
           .r2f-hero-aurora {
             background:
               radial-gradient(ellipse 42% 35% at 50% 31%,rgba(192,132,252,.2),transparent 72%),
@@ -684,8 +689,8 @@ export default function GlobalStyles() {
           }
           .r2f-hero-vignette {
             background:
-              linear-gradient(180deg,rgba(2,1,4,.28),transparent 22%,transparent 73%,#020104 100%),
-              radial-gradient(ellipse at center,transparent 28%,rgba(2,1,4,.3) 70%,rgba(2,1,4,.78) 100%);
+              linear-gradient(180deg,rgba(2,1,4,.22),transparent 18%,transparent 76%,#020104 100%),
+              radial-gradient(ellipse at center,transparent 36%,rgba(2,1,4,.24) 73%,rgba(2,1,4,.82) 100%);
           }
           .r2f-hero-refractions { pointer-events: none; perspective: 1200px; }
           .r2f-hero-slab {
@@ -713,7 +718,31 @@ export default function GlobalStyles() {
           }
           .r2f-hero-glint-a { left: 24%; top: 30%; }
           .r2f-hero-glint-b { right: 26%; top: 22%; animation-delay: -4.5s; animation-duration: 12s; }
-          .r2f-hero-kicker { background: linear-gradient(110deg,rgba(255,255,255,.06),rgba(124,58,237,.04),rgba(255,255,255,.025)); }
+          .r2f-reference-title { text-shadow: 0 10px 38px rgba(0,0,0,.68); }
+          .r2f-disciplines i { color: #9b4dff; font-size: 16px; font-style: normal; font-weight: 300; }
+          .r2f-rock-stage {
+            height: clamp(185px,20vw,245px);
+            isolation: isolate;
+          }
+          .r2f-rock-stage::after {
+            content: ""; position: absolute; z-index: 4; inset: auto 4% 2% 4%; height: 20%; pointer-events: none;
+            background: radial-gradient(ellipse,rgba(126,45,255,.2),transparent 70%); filter: blur(26px);
+          }
+          .r2f-rock-stage-image {
+            z-index: 1; object-position: 48% 52%; filter: saturate(.94) contrast(1.05) brightness(.82);
+            -webkit-mask-image: linear-gradient(90deg,transparent 0%,black 7%,black 93%,transparent 100%),linear-gradient(180deg,transparent 0%,black 13%,black 82%,transparent 100%);
+            -webkit-mask-composite: source-in;
+            mask-image: linear-gradient(90deg,transparent 0%,black 7%,black 93%,transparent 100%),linear-gradient(180deg,transparent 0%,black 13%,black 82%,transparent 100%);
+            mask-composite: intersect;
+          }
+          .r2f-rock-logo {
+            z-index: 3; right: 5.5%; top: 48%; transform: translateY(-50%);
+            filter: drop-shadow(0 24px 18px rgba(0,0,0,.72));
+          }
+          .r2f-rock-logo::after {
+            content: ""; position: absolute; left: 7%; right: 7%; bottom: 4%; height: 9%; border-radius: 50%;
+            background: #7c3aed; filter: blur(22px); opacity: .68; transform: perspective(120px) rotateX(62deg);
+          }
           .r2f-logo-stage { min-height: clamp(170px,21vw,258px); }
           .r2f-logo-stage::before {
             content: ""; position: absolute; left: 50%; top: 50%; width: min(62vw,640px); aspect-ratio: 1.85;
@@ -742,6 +771,7 @@ export default function GlobalStyles() {
             z-index: 3; width: clamp(220px,34vw,470px); aspect-ratio: 2.65 / 1;
             transform-origin: 50% 52%; will-change: transform;
           }
+          .r2f-rock-logo .r2f-liquid-logo { width: clamp(255px,31vw,405px); }
           .r2f-liquid-logo-halo {
             position: absolute; inset: 10% 2%; border-radius: 50%;
             background: radial-gradient(ellipse,rgba(168,85,247,.23),rgba(124,58,237,.09) 42%,transparent 72%);
@@ -781,9 +811,9 @@ export default function GlobalStyles() {
           }
           .r2f-hero-title-shine {
             color: transparent;
-            background: linear-gradient(95deg,#fff 3%,#e9d5ff 24%,#c084fc 48%,#7c3aed 67%,#f5e7ff 88%);
+            background: linear-gradient(180deg,#d57aff 0%,#9f3eff 48%,#7230e8 100%);
             background-size: 230% auto; -webkit-background-clip: text; background-clip: text;
-            animation: liquidTitle 8s ease-in-out infinite;
+            filter: drop-shadow(0 7px 20px rgba(114,48,232,.16));
           }
           .r2f-service-dock {
             position: relative; overflow: hidden;
@@ -991,6 +1021,17 @@ export default function GlobalStyles() {
  
           @media (max-width: 767px) {
             body.raw-to-finess-page main p { font-size: .98rem; }
+            .r2f-hero { min-height: 100svh; }
+            .r2f-reference-title {
+              max-width: calc(100vw - 40px); font-size: clamp(1.8rem,7.6vw,2.3rem) !important;
+              line-height: .96; letter-spacing: -.05em;
+            }
+            .r2f-reference-title > span { white-space: nowrap; }
+            .r2f-hero-eyebrow, .r2f-reference-title + p { max-width: calc(100vw - 44px) !important; }
+            .r2f-disciplines { max-width: calc(100vw - 40px); }
+            .r2f-rock-stage { width: calc(100vw - 40px); height: 185px; margin-top: 2px; }
+            .r2f-rock-stage-image { left: 0; right: auto; width: 100%; object-position: 40% 52%; }
+            .r2f-reference-actions { margin-top: -10px; }
             .r2f-hero-slab { opacity: .36; filter: saturate(.9); }
             .r2f-hero-slab-a { width: 190px; height: 68px; left: -108px; top: 25%; }
             .r2f-hero-slab-b { width: 170px; height: 62px; right: -98px; top: 18%; }

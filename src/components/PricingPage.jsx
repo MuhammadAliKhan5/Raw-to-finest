@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Check, Clock3, Globe, PenTool, Printer, Sparkles } from "lucide-react";
+import { ArrowUpRight, Globe, PenTool, Printer } from "lucide-react";
 
 import {
   Divider,
@@ -160,8 +160,8 @@ export default function PricingPage() {
             <div className="hero-orb hero-orb-b" />
             <ParticleField />
 
-            <div className="relative mx-auto grid max-w-[1480px] items-center gap-12 px-5 pb-16 md:px-8 md:pb-20 lg:grid-cols-[1.05fr_.95fr]">
-              <motion.div variants={staggerParent} initial="hidden" animate="show">
+            <div className="relative mx-auto flex max-w-[1100px] justify-center px-5 pb-16 text-center md:px-8 md:pb-20">
+              <motion.div variants={staggerParent} initial="hidden" animate="show" className="flex w-full flex-col items-center">
                 <RevealItem>
                   <GlassPill>SERVICE PRICING</GlassPill>
                 </RevealItem>
@@ -177,33 +177,10 @@ export default function PricingPage() {
                   />
                 </RevealItem>
 
-                <RevealItem className="mt-7 max-w-[520px] text-sm leading-7 text-white/40 md:text-base">
+                <RevealItem className="mx-auto mt-7 max-w-[560px] text-sm leading-7 text-white/40 md:text-base">
                   Clear starting ranges before the first call. Your final quote
                   reflects the scope, timeline and support your project needs.
                 </RevealItem>
-              </motion.div>
-              <motion.div initial={{ opacity: 0, x: 100, scale: .94 }} animate={{ opacity: 1, x: 0, scale: 1 }} transition={{ duration: .8, delay: .18, ease: [0.16, 1, .3, 1] }} className="relative hidden min-h-[470px] lg:block">
-                <div className="premium-panel absolute inset-x-7 top-0 overflow-hidden rounded-[32px] border border-[var(--orchid)]/25 bg-[#020617]/95 p-7 shadow-[0_35px_100px_rgba(0,0,0,.5)]">
-                  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--orchid)] to-transparent" />
-                  <div className="flex items-center justify-between border-b border-white/10 pb-5">
-                    <div className="flex items-center gap-3">
-                      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--violet)]/15 text-[var(--orchid)]"><Sparkles size={18} /></span>
-                      <div><span className="label-mono block tracking-[.16em] text-white">PROJECT BUILDER</span><span className="mt-1 block text-xs text-white/55">A clear starting estimate</span></div>
-                    </div>
-                    <span className="flex items-center gap-2 rounded-full border border-[var(--orchid)]/20 bg-[var(--orchid)]/10 px-3 py-2 label-mono text-[var(--champagne)]"><i className="h-1.5 w-1.5 rounded-full bg-[var(--champagne)] shadow-[0_0_10px_var(--champagne)]" /> LIVE</span>
-                  </div>
-                  {[[PenTool, "Brand identity", "Strategy + visual system", "$850+"], [Globe, "Web experience", "Design + responsive build", "$1,500+"], [Printer, "Campaign system", "Launch-ready creative", "$1,300+"]].map(([Icon, name, detail, price]) => (
-                    <div key={name} className="group mt-4 flex items-center gap-4 rounded-2xl border border-white/10 bg-[#07133f]/70 p-4 transition hover:border-[var(--orchid)]/30 hover:bg-[#0b1b55]">
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--violet)]/12 text-[var(--orchid)]"><Icon size={17} /></span>
-                      <div className="min-w-0 flex-1"><strong className="block text-sm text-white">{name}</strong><span className="mt-1 block text-xs text-white/52">{detail}</span></div>
-                      <strong className="font-display text-lg text-white">{price}</strong>
-                    </div>
-                  ))}
-                  <div className="mt-5 grid grid-cols-2 gap-3">
-                    <div className="rounded-2xl border border-white/10 bg-black/25 p-4"><Clock3 size={15} className="text-[var(--orchid)]" /><span className="mt-3 block text-xs text-white/50">Typical kickoff</span><strong className="mt-1 block text-sm text-white">2–3 working days</strong></div>
-                    <div className="rounded-2xl border border-white/10 bg-black/25 p-4"><Check size={15} className="text-[var(--champagne)]" /><span className="mt-3 block text-xs text-white/50">Every estimate</span><strong className="mt-1 block text-sm text-white">Scope matched</strong></div>
-                  </div>
-                </div>
               </motion.div>
             </div>
 

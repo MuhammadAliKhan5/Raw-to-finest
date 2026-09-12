@@ -34,12 +34,12 @@ import GlobalStyles from "./GlobalStyles";
 import { GsapClipReveal, GsapMarquee, GsapScrollReveal } from "./effects/GsapKit";
 
 const portfolioStrip = [
-  { label: "Podcast reel", type: "Short-form edit", src: "" },
-  { label: "Brand story", type: "Narrative edit", src: "https://mycontentkitchen.com/wp-content/uploads/2025/10/website-portfolio-clip-3-1.mp4" },
-  { label: "Founder edit", type: "Personal brand", src: "https://mycontentkitchen.com/wp-content/uploads/2025/10/website-portfolio-clip-1-1.mp4" },
-  { label: "Product cut", type: "Commercial edit", src: "https://mycontentkitchen.com/wp-content/uploads/2025/10/website-portfolio-clip-7-1.mp4" },
-  { label: "Lifestyle reel", type: "Social content", src: "https://mycontentkitchen.com/wp-content/uploads/2025/10/website-portfolio-clip-2-1.mp4" },
-  { label: "Campaign cut", type: "Performance creative", src: "https://mycontentkitchen.com/wp-content/uploads/2025/10/website-portfolio-clip-8-1.mp4" },
+  { label: "Podcast reel", type: "Short-form edit", src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789217149/yuxlbbv3d9skvnhmnc0c.mp4" },
+  { label: "Brand story", type: "Narrative edit", src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789217146/fduspouexvkzgoamkaez.mp4" },
+  { label: "Founder edit", type: "Personal brand", src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789217143/sd9n2wuhcjtova6adghs.mp4" },
+  { label: "Product cut", type: "Commercial edit", src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789217140/ew9ocyuv0fcfq6upbuqc.mp4" },
+  { label: "Lifestyle reel", type: "Social content", src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789217133/xqnm7il1mygx0ssysdrn.mp4" },
+  { label: "Campaign cut", type: "Performance creative", src: "" },
 ];
 
 const shortFormPlans = [
@@ -150,10 +150,6 @@ const trustPoints = [
   { icon: Layers, label: "Dedicated editing team" },
 ];
 
-/* ---------------------------------------------------------------------- */
-/*  PRICE CARD                                                            */
-/* ---------------------------------------------------------------------- */
-
 function PriceCard({ plan, onBuy, index = 0 }) {
   return (
     <motion.article
@@ -247,13 +243,13 @@ export default function VideoEditsPage() {
             <div className="hero-orb hero-orb-b" />
             <ParticleField />
 
-            <div className="relative mx-auto grid max-w-[1480px] items-center gap-10 px-5 pb-16 md:px-8 md:pb-20 lg:grid-cols-2">
-              <motion.div variants={staggerParent} initial="hidden" animate="show" className="text-left">
+            <div className="relative mx-auto max-w-[1100px] px-5 pb-16 text-center md:px-8 md:pb-20">
+              <motion.div variants={staggerParent} initial="hidden" animate="show" className="flex flex-col items-center text-center">
                 <RevealItem>
                   <GlassPill>VIDEO EDITING FOR AGENCIES</GlassPill>
                 </RevealItem>
 
-                <GsapClipReveal className="mt-7 max-w-[720px]">
+                <GsapClipReveal className="mx-auto mt-7 max-w-[900px]">
                   <div className="font-display text-[clamp(2.6rem,6.6vw,6.2rem)] font-bold uppercase leading-[0.9] tracking-[-0.05em]">
                     We cook delicious
                     <br />
@@ -263,13 +259,13 @@ export default function VideoEditsPage() {
                   </div>
                 </GsapClipReveal>
 
-                <RevealItem className="mt-7 max-w-[540px] text-sm leading-7 text-white/40 md:text-base">
+                <RevealItem className="mx-auto mt-7 max-w-[580px] text-sm leading-7 text-white/40 md:text-base">
                   Faster turnarounds, less back-and-forth, a dedicated team
                   behind every delivery. Built for agencies that publish
                   every week, not once a quarter.
                 </RevealItem>
 
-                <RevealItem className="mt-9 flex flex-wrap items-center justify-start gap-4">
+                <RevealItem className="mt-9 flex flex-wrap items-center justify-center gap-4">
                   <MagneticButton onClick={openBooking}>
                     Book a consultation
                     <ArrowUpRight size={14} />
@@ -283,40 +279,13 @@ export default function VideoEditsPage() {
                 </RevealItem>
               </motion.div>
 
-              <motion.div initial={{ opacity: 0, x: 120, scale: .93 }} animate={{ opacity: 1, x: 0, scale: 1 }} transition={{ duration: .8, delay: .18, ease: [0.16,1,.3,1] }} className="premium-panel relative hidden min-h-[455px] overflow-hidden rounded-[32px] border border-[var(--orchid)]/25 bg-[#020617]/95 p-6 shadow-[0_35px_100px_rgba(0,0,0,.5)] lg:block">
-                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--orchid)] to-transparent" />
-                <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                  <div className="flex items-center gap-3"><span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--violet)]/15 text-[var(--orchid)]"><Film size={18} /></span><div><span className="label-mono block tracking-[.16em] text-white">EDITING SUITE</span><span className="mt-1 block text-xs text-white/55">Campaign cut / V.04</span></div></div>
-                  <span className="flex items-center gap-2 rounded-full border border-[var(--orchid)]/20 bg-[var(--orchid)]/10 px-3 py-2 label-mono text-[var(--champagne)]"><i className="h-1.5 w-1.5 rounded-full bg-[var(--champagne)] shadow-[0_0_10px_var(--champagne)]" /> EDITING</span>
-                </div>
-                <div className="relative mt-5 aspect-video overflow-hidden rounded-2xl border border-white/10 bg-[#02040f]">
-                  <video src={portfolioStrip[0].src} muted loop autoPlay playsInline preload="metadata" className="h-full w-full object-cover opacity-80" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/55 to-transparent" />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <span className="flex h-14 w-14 items-center justify-center rounded-full border border-[var(--orchid)]/30 bg-[#07133f]/85 text-[var(--champagne)] shadow-[0_0_35px_rgba(46,175,255,.18)]"><Play size={17} fill="currentColor" /></span>
-                    <strong className="mt-4 text-sm text-white">Brand campaign / master cut</strong>
-                    <span className="mt-1 text-xs text-white/55">Color grade · sound mix · captions</span>
-                  </div>
-                  <i className="absolute left-3 top-3 h-5 w-5 border-l border-t border-[var(--orchid)]/45" /><i className="absolute bottom-3 right-3 h-5 w-5 border-b border-r border-[var(--orchid)]/45" />
-                  <span className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full bg-black/65 px-3 py-2 label-mono text-white"><Play size={10} fill="currentColor" /> 00:18 / 00:42</span>
-                  <span className="absolute right-3 top-3 rounded-full border border-white/15 bg-black/60 px-3 py-2 label-mono text-[var(--champagne)]">4K</span>
-                </div>
-                <div className="relative mt-5 space-y-2.5">
-                  <span className="absolute bottom-0 left-[64%] top-0 z-10 w-px bg-[var(--champagne)] shadow-[0_0_10px_var(--champagne)]"><i className="absolute -top-1 -left-1 h-2 w-2 rounded-full bg-[var(--champagne)]" /></span>
-                  {[["VIDEO",84,"from-[#1768FF] to-[#2EAFFF]"],["AUDIO",66,"from-[#0f4acb] to-[#1768FF]"],["TITLES",74,"from-[#2EAFFF] to-[#6EE7FF]"]].map(([label, width, color]) => (
-                    <div key={label} className="grid grid-cols-[52px_1fr] items-center gap-3"><span className="label-mono text-white/50">{label}</span><div className="flex h-8 items-center rounded-lg bg-white/[.045] px-1.5"><span className={`h-4 rounded-md bg-gradient-to-r ${color}`} style={{ width: `${width}%` }} /></div></div>
-                  ))}
-                </div>
-                <div className="mt-5 flex items-center justify-between border-t border-white/10 pt-4 text-xs text-white/58"><span className="flex items-center gap-2"><Layers size={14} className="text-[var(--orchid)]" /> 12 active layers</span><span className="flex items-center gap-2"><ShieldCheck size={14} className="text-[var(--champagne)]" /> Auto-saved</span></div>
-              </motion.div>
-
               {/* Original elastic fan pattern, now populated with live R2F portfolio videos. */}
               <motion.div
                 initial={{ opacity: 0, y: 150, scale: .86 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, amount: .2 }}
                 transition={{ duration: 1.1, ease: [0.16,1,.3,1] }}
-                className="relative h-[460px] min-w-0 lg:col-span-2 md:h-[650px]"
+                className="relative h-[460px] min-w-0 md:h-[650px]"
               >
                 {portfolioStrip.map((item, index) => (
                   <motion.div

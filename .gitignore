@@ -5,16 +5,6 @@ node_modules/
 dist/
 build/
 
-# Large video files
-*.mp4
-*.MP4
-*.mov
-*.MOV
-*.mkv
-*.avi
-*.webm
-*.WEBM
-
 # Environment variables
 .env
 .env.local

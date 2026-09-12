@@ -5,10 +5,8 @@ import {
   Clapperboard,
   Palette,
   Play,
-  Scissors,
   Volume2,
   VolumeX,
-  Wand2,
 } from "lucide-react";
 
 import {
@@ -37,10 +35,6 @@ import { Globe as GlobeIcon, Target as TargetIcon } from "lucide-react";
 
 const PROGRAM_ICONS = [Palette, Clapperboard, GlobeIcon, TargetIcon];
 
-/* ---------------------------------------------------------------------- */
-/*  CONTENT — Raw to Finest portfolio / content menu                      */
-/* ---------------------------------------------------------------------- */
-
 const impactStats = [
   ["500+", "PROJECTS DELIVERED"],
   ["92%", "CLIENT RETENTION"],
@@ -50,110 +44,74 @@ const impactStats = [
 
 const graphicDesignItems = [
   {
-    src: "https://mycontentkitchen.com/wp-content/uploads/2025/07/HealthStay-Post-Portfolio-scaled-1024x652.jpg",
+    src: "https://res.cloudinary.com/dc3h8zsv3/image/upload/v1789219179/ccxzqpum4ovpkbnzehcy.png",
     tag: "SOCIAL POST",
     title: "HealthStay campaign",
     aspect: "aspect-[4/5]",
   },
   {
-    src: "https://mycontentkitchen.com/wp-content/uploads/2025/07/Rectangle-8249-1024x699.jpg",
+    src: "https://res.cloudinary.com/dc3h8zsv3/image/upload/v1789219657/wumr9zjnqcyqmvxafc08.jpg",
     tag: "BRAND CONTENT",
     title: "Feed design system",
     aspect: "aspect-square",
   },
   {
-    src: "https://mycontentkitchen.com/wp-content/uploads/2025/07/Rectangle-8246-1024x699.jpg",
+    src: "https://res.cloudinary.com/dc3h8zsv3/image/upload/v1789219656/xuxxu6azfnzhqmuxnom7.png",
     tag: "SOCIAL POST",
     title: "Product spotlight",
     aspect: "aspect-[4/3]",
   },
   {
-    src: "https://mycontentkitchen.com/wp-content/uploads/2025/07/Rectangle-8245-1024x699.jpg",
+    src: "https://res.cloudinary.com/dc3h8zsv3/image/upload/v1789219656/pj8p3flbfy2qgu4ifwjv.jpg",
     tag: "CAMPAIGN",
     title: "Launch series",
     aspect: "aspect-[4/5]",
   },
   {
-    src: "https://mycontentkitchen.com/wp-content/uploads/2025/07/Rectangle-8240-3.png",
+    src: "https://res.cloudinary.com/dc3h8zsv3/image/upload/v1789219656/mxzgf0jfexapawx5ntek.png",
     tag: "GRAPHIC",
     title: "Carousel design",
     aspect: "aspect-square",
   },
   {
-    src: "https://mycontentkitchen.com/wp-content/uploads/2025/07/Rectangle-8240-2.png",
+    src: "https://res.cloudinary.com/dc3h8zsv3/image/upload/v1789219655/dbajok9w6q8scytv7lsi.png",
     tag: "GRAPHIC",
     title: "Story template",
-    aspect: "aspect-[4/3]",
-  },
-  {
-    src: "https://mycontentkitchen.com/wp-content/uploads/2025/07/Rectangle-8240-1.png",
-    tag: "GRAPHIC",
-    title: "Promo tile",
-    aspect: "aspect-[4/5]",
-  },
-  {
-    src: "https://mycontentkitchen.com/wp-content/uploads/2025/07/Rectangle-8240-1-1.png",
-    tag: "GRAPHIC",
-    title: "Announcement post",
-    aspect: "aspect-square",
-  },
-  {
-    src: "https://mycontentkitchen.com/wp-content/uploads/2025/07/Rectangle-8240-7.png",
-    tag: "GRAPHIC",
-    title: "Quote card",
-    aspect: "aspect-[4/3]",
-  },
-  {
-    src: "https://mycontentkitchen.com/wp-content/uploads/2025/07/Rectangle-8240-4.png",
-    tag: "GRAPHIC",
-    title: "Event graphic",
-    aspect: "aspect-[4/5]",
-  },
-  {
-    src: "https://darkgoldenrod-frog-789331.hostingersite.com/wp-content/uploads/2025/05/Group-2147226394-15.png",
-    tag: "GRAPHIC",
-    title: "Feature graphic",
-    aspect: "aspect-square",
-  },
-  {
-    src: "https://mycontentkitchen.com/wp-content/uploads/2025/07/Rectangle-8240-5.png",
-    tag: "GRAPHIC",
-    title: "Highlight cover",
     aspect: "aspect-[4/3]",
   },
 ];
 
 const videoEditItems = [
   {
-    src: "https://www.pexels.com/download/video/15821942/",
-    title: "Podcast reel",
-    tag: "PODCAST CUT",
-  },
-  {
-    src: "https://www.pexels.com/download/video/33812576/",
+    src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789216207/ednxjhlhnrjzbh3f3kzu.mp4",
     title: "Brand reel",
     tag: "SOCIAL EDIT",
   },
   {
-    src: "https://www.pexels.com/download/video/7103634/",
-    title: "Founder story",
-    tag: "TALKING HEAD",
+    src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789216189/sdiszag91gehxzxitzgu.mp4",
+    title: "Campaign cut",
+    tag: "CAMPAIGN",
   },
   {
-    src: "https://www.pexels.com/download/video/33891312/",
+    src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789216202/gsupf1ktfcocucqmxh0g.mp4",
     title: "Product edit",
     tag: "PRODUCT CUT",
   },
   {
-    src: "https://www.pexels.com/download/video/38369995/",
+    src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789216205/ckyuminrusxxgyalv7h5.mp4",
+    title: "Founder story",
+    tag: "TALKING HEAD",
+  },
+  {
+    src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789216190/kxw2zd1rnd8ksarcjxdy.mp4",
     title: "Lifestyle reel",
     tag: "LIFESTYLE",
   },
-  {
-    src: "https://www.pexels.com/download/video/33891300/",
-    title: "Campaign cut",
-    tag: "CAMPAIGN",
-  }
+   {
+    src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789216208/icnqiktzcyzmcetfnkg7.mp4",
+    title: "Podcast reel",
+    tag: "PODCAST CUT",
+  },
 ];
 
 const webDesignItems = [
@@ -166,10 +124,11 @@ const webDesignItems = [
 ];
 
 const heroVisuals = [
-  { src: "https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=1000&q=88", title: "Interface art direction" },
-  { src: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=1000&q=88", title: "Brand design workspace" },
-  { src: "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?auto=format&fit=crop&w=1000&q=88", title: "Digital design study" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789217637/lvuv1paikqi09dxwca1o.mp4", title: "Interface art direction" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789220566/pxjgac3szzder7yxuaql.mp4", title: "Brand design workspace" },
 ];
+
+const heroVideos = videoEditItems.slice(0, 2);
 
 const fullSpreadVisuals = [
   {
@@ -201,75 +160,6 @@ const fullSpreadVisuals = [
     href: "/#programs",
   },
 ];
-
-/* ---------------------------------------------------------------------- */
-/*  LOCAL HELPERS — the "menu" sections' decorative trims                 */
-/* ---------------------------------------------------------------------- */
-
-function ZigzagEdge({ color = "#3FA34D", side = "left" }) {
-  const size = 16;
-  const bgImage = `linear-gradient(135deg, ${color} 25%, transparent 25.5%),
-    linear-gradient(225deg, ${color} 25%, transparent 25.5%),
-    linear-gradient(315deg, ${color} 25%, transparent 25.5%),
-    linear-gradient(45deg, ${color} 25%, transparent 25.5%)`;
-
-  if (side === "top") {
-    return (
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 z-10 h-4"
-        style={{
-          backgroundImage: bgImage,
-          backgroundPosition: `0 -${size / 2}px, 0 -${size / 2}px, 0 0, 0 0`,
-          backgroundSize: `${size}px ${size}px`,
-        }}
-      />
-    );
-  }
-
-  return (
-    <div
-      aria-hidden="true"
-      className={`pointer-events-none absolute inset-y-0 z-10 hidden w-4 md:block ${side === "left" ? "left-0" : "right-0"
-        }`}
-      style={{
-        backgroundImage: bgImage,
-        backgroundPosition: `-${size / 2}px 0, -${size / 2}px 0, 0 0, 0 0`,
-        backgroundSize: `${size}px ${size}px`,
-      }}
-    />
-  );
-}
-
-function Mascot({ accent = "#3FA34D", icon: Icon = Wand2, flip = false, className = "" }) {
-  return (
-    <div
-      className={`pointer-events-none absolute z-10 hidden select-none sm:block ${className}`}
-      aria-hidden="true"
-    >
-      <div className={`mascot-float relative ${flip ? "-scale-x-100" : ""}`}>
-        <svg width="72" height="98" viewBox="0 0 86 118" fill="none">
-          <path
-            d="M43 6 L78 96 C78 108 62 114 43 114 C24 114 8 108 8 96 Z"
-            fill="#EEF8FF"
-            stroke="#07102F"
-            strokeWidth="3"
-          />
-          <circle cx="34" cy="58" r="3.5" fill="#07102F" />
-          <circle cx="52" cy="58" r="3.5" fill="#07102F" />
-          <path d="M34 73 Q43 79 52 73" stroke="#07102F" strokeWidth="3" fill="none" strokeLinecap="round" />
-          <path d="M12 92 L1 110 M74 92 L85 110" stroke="#07102F" strokeWidth="3" strokeLinecap="round" />
-        </svg>
-        <span
-          className="absolute -top-3 left-1/2 flex h-9 w-9 -translate-x-1/2 items-center justify-center rounded-full border-2 border-[#07102F] bg-white shadow-[0_4px_0_rgba(24,13,36,.9)]"
-          style={{ color: accent }}
-        >
-          <Icon size={16} strokeWidth={2.4} />
-        </span>
-      </div>
-    </div>
-  );
-}
 
 function VideoCard({ item, index = 0, active = false }) {
   const videoRef = useRef(null);
@@ -304,7 +194,7 @@ function VideoCard({ item, index = 0, active = false }) {
     if (video.paused) {
       video.play()
         .then(() => setPlaying(true))
-        .catch(() => {});
+        .catch(() => { });
     } else {
       video.pause();
       setPlaying(false);
@@ -515,9 +405,26 @@ export default function PortfolioPage() {
               </motion.div>
 
               <motion.div initial={{ opacity: 0, x: 90, rotate: 4 }} animate={{ opacity: 1, x: 0, rotate: 0 }} transition={{ duration: 1.05, delay: .2, ease: [0.16, 1, .3, 1] }} className="relative hidden h-[520px] lg:block">
-                {heroVisuals.map((item, index) => (
-                  <motion.div key={item.src} animate={{ y: [0, index % 2 ? 14 : -12, 0] }} transition={{ duration: 6 + index, repeat: Infinity, ease: "easeInOut" }} className={`absolute overflow-hidden rounded-[28px] border border-white/15 bg-white/5 p-2 shadow-[0_35px_90px_rgba(0,0,0,.45)] ${index === 0 ? "left-[8%] top-[4%] h-[360px] w-[270px] -rotate-6" : index === 1 ? "right-[2%] top-[16%] h-[330px] w-[245px] rotate-6" : "bottom-[0] left-[30%] h-[230px] w-[310px] rotate-1"}`}>
-                    <img src={item.src} alt={item.title} className="h-full w-full rounded-[21px] object-cover" />
+                {heroVideos.map((item, index) => (
+                  <motion.div
+                    key={item.src}
+                    animate={{ y: [0, index % 2 ? 14 : -12, 0] }}
+                    transition={{ duration: 6 + index, repeat: Infinity, ease: "easeInOut" }}
+                    className={`absolute overflow-hidden rounded-[28px] border border-white/15 bg-white/5 p-2 shadow-[0_35px_90px_rgba(0,0,0,.45)] ${index === 0 ? "left-[8%] top-[4%] h-[360px] w-[270px] -rotate-6" : "right-[2%] top-[16%] h-[330px] w-[245px] rotate-6"}`}
+                  >
+                    <video
+                      src={item.src}
+                      aria-label={`${item.title} portfolio preview`}
+                      muted
+                      loop
+                      autoPlay
+                      playsInline
+                      preload="metadata"
+                      className="h-full w-full rounded-[21px] object-cover"
+                    />
+                    <span className="absolute bottom-4 left-4 flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-black/55 text-white backdrop-blur-md">
+                      <Play size={10} fill="currentColor" />
+                    </span>
                   </motion.div>
                 ))}
                 <div className="absolute right-8 top-0 rounded-full border border-white/15 bg-[#201032]/80 px-4 py-2 label-mono text-[8px] uppercase tracking-[.2em] text-white/60 backdrop-blur-xl">Selected work / 2026</div>
@@ -553,7 +460,7 @@ export default function PortfolioPage() {
             </div>
 
             <GsapHorizontalScroll trackClassName="gap-6 px-5 md:px-8" speed={0.9}>
-              {PROGRAM_LINKS.map(([number, label], index) => {
+              {PROGRAM_LINKS.slice(0, 3).map(([number, label], index) => {
                 const Icon = PROGRAM_ICONS[index] || Palette;
                 const visual = fullSpreadVisuals[index];
                 return (
@@ -623,8 +530,8 @@ export default function PortfolioPage() {
               <RevealGroup className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
                 {webDesignItems.map((item, index) => (
                   <GsapScrollReveal key={item.src} direction={index % 3 === 0 ? "left" : index % 3 === 2 ? "right" : "up"} index={index}>
-                    <motion.article key={item.src} initial={{ opacity: 0, x: index % 3 === 0 ? -150 : index % 3 === 2 ? 150 : 0, y: index % 3 === 1 ? 120 : 35, rotateY: index % 3 === 0 ? -20 : index % 3 === 2 ? 20 : 0, scale: .88 }} whileInView={{ opacity: 1, x: 0, y: 0, rotateY: 0, scale: 1 }} viewport={{ once: true, amount: .3 }} transition={{ type: "spring", stiffness: 105, damping: 16, delay: (index % 3) * .12 }} whileHover={{ y: -12, rotate: index % 2 ? .8 : -.8, scale: 1.015 }} className="group overflow-hidden rounded-[26px] border border-[#07102F]/10 bg-white p-3 shadow-[0_20px_55px_-30px_rgba(24,13,36,.4)]">
-                      <div className="media-raw aspect-[16/11] overflow-hidden rounded-[19px]"><img src={item.src} alt={`${item.title} web design concept`} loading="lazy" className="h-full w-full object-cover" /></div>
+                    <motion.article key={item.src} initial={{ opacity: 0, x: index % 3 === 0 ? -150 : index % 3 === 2 ? 150 : 0, y: index % 3 === 1 ? 120 : 35, rotateY: index % 3 === 0 ? -20 : index % 3 === 2 ? 20 : 0, scale: .88 }} whileInView={{ opacity: 1, x: 0, y: 0, rotateY: 0, scale: 1 }} viewport={{ once: true, amount: .3 }} transition={{ type: "spring", stiffness: 105, damping: 16, delay: (index % 3) * .12 }} whileHover={{ y: -12, rotate: index % 2 ? .8 : -.8, scale: 1.015 }} className="group overflow-hidden rounded-[26px] border border-[#07102F]/10 bg-white p-3 shadow-none">
+                      <div className="aspect-[16/11] overflow-hidden rounded-[19px]"><img src={item.src} alt={`${item.title} web design concept`} loading="lazy" className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]" /></div>
                       <div className="flex items-end justify-between gap-4 px-2 pb-2 pt-5"><div><span className="label-mono text-[7px] tracking-[.18em] text-[var(--violet)]">{item.tag}</span><h3 className="mt-1 font-display text-xl font-bold">{item.title}</h3></div><span className="h-3 w-3 rounded-full" style={{ background: item.accent }} /></div>
                     </motion.article>
                   </GsapScrollReveal>
@@ -641,9 +548,6 @@ export default function PortfolioPage() {
             className="menu-section relative overflow-hidden"
             style={{ background: "#0A1748" }}
           >
-            <ZigzagEdge color="#71DFFF" side="right" />
-            <Mascot accent="#71DFFF" icon={Scissors} flip className="left-6 top-6 md:left-14 md:top-10" />
-
             <div className="relative mx-auto max-w-[1480px] px-5 py-20 md:px-10 md:py-28">
               <Reveal className="text-center">
                 <div className="mb-4 flex justify-center">
@@ -656,7 +560,7 @@ export default function PortfolioPage() {
               </Reveal>
 
               <Reveal delay={0.1}>
-                <div className="menu-card relative mt-10 overflow-hidden rounded-[30px] border-[3px] border-[#07102F]/15 bg-[#EEF8FF] p-5 shadow-[0_25px_60px_-20px_rgba(0,0,0,.35)] md:mt-14 md:p-9">
+                <div className="menu-card relative mx-auto mt-10 max-w-[1080px] overflow-hidden rounded-[30px] border-[3px] border-[#07102F]/15 bg-[#EEF8FF] p-4 shadow-[0_25px_60px_-20px_rgba(0,0,0,.35)] md:mt-14 md:p-6">
                   <RevealGroup className="grid grid-cols-3 gap-3 md:gap-4">
                     {videoEditItems.map((item, index) => (
                       <GsapScrollReveal key={item.src + index} direction={index % 3 === 0 ? "left" : index % 3 === 2 ? "right" : "up"} index={index}>
@@ -681,9 +585,6 @@ export default function PortfolioPage() {
             className="menu-section relative overflow-hidden"
             style={{ background: "#1646D8" }}
           >
-            <ZigzagEdge color="#80EAFF" side="left" />
-            <Mascot accent="#80EAFF" icon={Wand2} className="right-6 top-6 md:right-14 md:top-10" />
-
             <div className="relative mx-auto max-w-[1480px] px-5 py-20 md:px-10 md:py-28">
               <Reveal className="text-center">
                 <div className="mb-4 flex justify-center">
@@ -696,34 +597,31 @@ export default function PortfolioPage() {
               </Reveal>
 
               <Reveal delay={0.1}>
-                <div className="menu-card relative mt-10 overflow-hidden rounded-[30px] border-[3px] border-[#07102F]/15 bg-[#EEF8FF] p-5 shadow-[0_25px_60px_-20px_rgba(0,0,0,.35)] md:mt-14 md:p-9">
-                  <RevealGroup className="columns-2 gap-4 md:columns-3">
+                <div className="menu-card relative mx-auto mt-10 max-w-[1080px] overflow-hidden rounded-[30px] border-[3px] border-[#07102F]/15 bg-[#EEF8FF] p-4 shadow-none md:mt-14 md:p-6">
+                  <RevealGroup className="grid grid-cols-2 items-start gap-4 md:grid-cols-3">
                     {graphicDesignItems.map((item, index) => (
-                      <GsapScrollReveal key={item.title + index} direction={index % 3 === 0 ? "left" : index % 3 === 2 ? "right" : "up"} index={index} className="break-inside-avoid">
-                        <motion.div
-                          initial={{ opacity: 0, x: index % 3 === 0 ? -140 : index % 3 === 2 ? 140 : 0, y: index % 3 === 1 ? 110 : 35, rotate: index % 3 === 0 ? -7 : index % 3 === 2 ? 7 : 0, scale: .88 }}
-                          whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0, scale: 1 }}
-                          viewport={{ once: true, amount: .28 }}
-                          whileHover={{ y: -7, rotate: index % 2 === 0 ? -0.6 : 0.6 }}
-                          transition={{ type: "spring", stiffness: 280, damping: 20 }}
-                          className={`media-raw group relative mb-4 break-inside-avoid rounded-2xl border-2 border-[#07102F]/10 bg-white shadow-[0_2px_0_rgba(24,13,36,.1)] transition-shadow duration-500 hover:shadow-[0_22px_45px_-15px_rgba(24,13,36,.45)] ${item.aspect}`}
-                        >
-                          <img
-                            src={item.src}
-                            alt={item.title}
-                            loading="lazy"
-                            decoding="async"
-                            className="h-full w-full object-cover"
-                          />
-                          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
-                          <span className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/0 transition duration-500 group-hover:ring-white/20" />
-                          <div className="absolute bottom-2 left-2 right-2 translate-y-2 opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                            <span className="label-mono rounded-full bg-black/60 px-2 py-1 text-[6.5px] uppercase tracking-[0.16em] text-white">
-                              {item.tag}
-                            </span>
-                          </div>
-                        </motion.div>
-                      </GsapScrollReveal>
+                      <motion.div
+                        key={item.title + index}
+                        initial={{ opacity: 0, y: 35, scale: .92 }}
+                        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                        viewport={{ once: true, amount: .15 }}
+                        whileHover={{ y: -5 }}
+                        transition={{ type: "spring", stiffness: 260, damping: 22, delay: index * .05 }}
+                        className={`group relative overflow-hidden rounded-2xl border-2 border-[#07102F]/10 bg-white shadow-none ${item.aspect}`}
+                      >
+                        <img
+                          src={item.src}
+                          alt={item.title}
+                          loading="eager"
+                          decoding="async"
+                          className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+                        />
+                        <div className="absolute bottom-2 left-2 right-2 translate-y-2 opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                          <span className="label-mono rounded-full bg-[#5b21b6]/85 px-2 py-1 text-[6.5px] uppercase tracking-[0.16em] text-white">
+                            {item.tag}
+                          </span>
+                        </div>
+                      </motion.div>
                     ))}
                   </RevealGroup>
                 </div>

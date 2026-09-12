@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
-  ArrowUpRight,
   ChevronLeft,
   ChevronRight,
   Clapperboard,
@@ -13,7 +12,6 @@ import {
   Sparkles,
   Target,
   UserRound,
-  UsersRound,
 } from "lucide-react";
 import {
   BookingModal,
@@ -90,98 +88,57 @@ function Reveal({ children, className = "", delay = 0 }) {
   );
 }
 
-function LiquidLogo({ reduceMotion }) {
-  return (
-    <motion.div
-      className="r2f-liquid-logo relative"
-      animate={reduceMotion ? undefined : {
-        scaleX: [1, 1.025, 0.982, 1.018, 1],
-        scaleY: [1, 0.975, 1.022, 0.988, 1],
-        rotate: [0, -0.45, 0.35, -0.2, 0],
-      }}
-      transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
-      role="img"
-      aria-label="Raw to Finest Studios"
-    >
-      <svg className="pointer-events-none absolute h-0 w-0" aria-hidden="true">
-        <defs>
-          <filter id="r2f-liquid-distort" x="-18%" y="-35%" width="136%" height="170%" colorInterpolationFilters="sRGB">
-            <feTurbulence type="fractalNoise" baseFrequency="0.008 0.022" numOctaves="2" seed="8" result="liquidNoise">
-              {!reduceMotion && (
-                <animate
-                  attributeName="baseFrequency"
-                  dur="15s"
-                  values="0.008 0.022;0.013 0.016;0.006 0.027;0.011 0.019;0.008 0.022"
-                  repeatCount="indefinite"
-                />
-              )}
-            </feTurbulence>
-            <feGaussianBlur in="liquidNoise" stdDeviation="0.7" result="softNoise" />
-            <feDisplacementMap in="SourceGraphic" in2="softNoise" scale="7" xChannelSelector="R" yChannelSelector="B">
-              {!reduceMotion && (
-                <animate attributeName="scale" dur="11s" values="3;10;5;12;3" repeatCount="indefinite" />
-              )}
-            </feDisplacementMap>
-          </filter>
-        </defs>
-      </svg>
-
-      <span className="r2f-liquid-logo-halo" aria-hidden="true" />
-      <span className="r2f-liquid-logo-mark r2f-liquid-logo-depth" aria-hidden="true" />
-      <span className="r2f-liquid-logo-mark r2f-liquid-logo-core" aria-hidden="true" />
-      <span className="r2f-liquid-logo-mark r2f-liquid-logo-spectrum" aria-hidden="true" />
-      <span className="r2f-liquid-logo-gloss" aria-hidden="true" />
-    </motion.div>
-  );
-}
-
 function Hero({ onBook }) {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section id="home" className="r2f-hero relative flex min-h-[92svh] overflow-hidden pt-[112px] text-white md:pt-[124px]">
+    <section id="home" className="r2f-hero relative flex min-h-[92svh] overflow-hidden pt-[104px] text-white md:pt-[108px]">
       <div className="r2f-hero-vignette absolute inset-0" aria-hidden="true" />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[1380px] flex-col px-5 pb-6 md:px-8 md:pb-7">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1380px] flex-col px-5 pb-5 md:px-8 md:pb-6">
         <motion.div
           initial={{ opacity: 0, y: 34, scale: 0.965 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: reduceMotion ? 0 : 1, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
-          className="mx-auto flex w-full max-w-[920px] flex-1 flex-col items-center justify-center text-center"
+          className="mx-auto flex w-full max-w-[1080px] flex-1 flex-col items-center text-center"
         >
-          <div className="r2f-hero-kicker inline-flex items-center gap-2.5 rounded-full border border-white/12 px-3.5 py-1.5 text-[7px] font-semibold uppercase tracking-[.28em] text-white/55 backdrop-blur-xl md:text-[8px]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#c084fc] shadow-[0_0_16px_#a855f7]" />
-            Independent creative studio
-            <span className="hidden h-px w-8 bg-gradient-to-r from-[#c084fc]/60 to-transparent sm:block" />
-          </div>
-
-          <div className="r2f-logo-stage relative flex w-full items-center justify-center">
-            <span className="r2f-logo-orbit r2f-logo-orbit-a" aria-hidden="true" />
-            <span className="r2f-logo-orbit r2f-logo-orbit-b" aria-hidden="true" />
-            <span className="r2f-logo-scanline" aria-hidden="true" />
-            <LiquidLogo reduceMotion={reduceMotion} />
-          </div>
-
-          <p className="r2f-hero-eyebrow -mt-2 w-full text-[7px] font-semibold uppercase tracking-[.3em] text-white/48 sm:text-[8px] sm:tracking-[.4em] md:text-[9px]">
-            Raw to Finest <span className="text-[#c084fc]">/ Studios</span>
+          <p className="r2f-hero-eyebrow mt-5 w-full text-[9px] font-semibold uppercase tracking-[.5em] text-white/75 sm:text-[10px] md:mt-0 md:text-[11px]">
+            Raw to <span className="text-[#b455ff]">Finest</span>
           </p>
-          <h1 className="mt-3 w-full font-display text-[clamp(1.9rem,5.4vw,5.15rem)] font-bold uppercase leading-[.88] tracking-[-.06em] text-white">
-            Raw ideas. <span className="r2f-hero-title-shine block font-editorial normal-case italic">Refined into <span className="block sm:inline">impact.</span></span>
+          <h1 className="r2f-reference-title mt-2.5 w-full font-display text-[clamp(2.35rem,5vw,4.65rem)] font-bold leading-[.9] tracking-[-.055em] text-white">
+            <span className="block">Raw Ideas.</span>
+            <span className="r2f-hero-title-shine block">Refined into Impact.</span>
           </h1>
-          <p className="mt-4 w-full max-w-[535px] text-[13px] leading-6 text-white/55 md:mt-5 md:text-sm md:leading-7">
-            Cinematic edits, design and digital experiences shaped with clarity, craft and a relentless eye for the final detail.
+          <p className="mt-3.5 w-full max-w-[575px] text-[13px] leading-6 text-white/67 md:text-sm md:leading-6">
+            A creative agency turning raw footage, ideas and brands<br className="hidden sm:block" /> into powerful visual stories.
           </p>
-          <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row">
-            <MagneticButton href="/portfolio" className="min-w-[190px] justify-center py-3.5">
-              Explore our work <ArrowRight size={15} />
+          <div className="r2f-disciplines mt-3.5 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[8px] font-semibold uppercase tracking-[.18em] text-white/65 sm:gap-x-5 sm:text-[9px] md:text-[9px]">
+            <span>Video Editing</span><i>/</i>
+            <span>Graphic Design</span><i>/</i>
+            <span>Automotive Videos</span><i>/</i>
+            <span>Websites</span>
+          </div>
+
+          <div className="r2f-rock-stage relative w-full max-w-[920px]" aria-label="A raw rock breaking apart with violet energy">
+            <img
+              src="/images/r2f-rock-reveal-hero.png"
+              alt=""
+              className="r2f-rock-stage-image absolute inset-0 h-full w-full object-cover"
+              aria-hidden="true"
+            />
+          </div>
+
+          <div className="r2f-reference-actions -mt-4 flex flex-col items-center gap-3 sm:flex-row md:-mt-6">
+            <MagneticButton href="/portfolio" className="min-w-[200px] justify-center py-3.5">
+              View our work <ArrowRight size={15} />
             </MagneticButton>
-            <MagneticButton onClick={onBook} variant="ghost" className="min-w-[190px] justify-center py-3.5">
-              Start a project <ArrowUpRight size={15} />
+            <MagneticButton onClick={onBook} variant="ghost" className="min-w-[235px] justify-center py-3.5">
+              Get a free sample edit <ArrowRight size={15} />
             </MagneticButton>
           </div>
         </motion.div>
 
-        <div className="r2f-service-dock mt-7 grid items-center gap-4 rounded-[22px] border border-white/15 px-4 py-3 md:px-5 lg:grid-cols-[170px_1fr_160px]">
+        <div className="r2f-service-dock mt-4 grid items-center gap-4 rounded-[22px] border border-white/15 px-4 py-3 md:px-5 lg:grid-cols-[170px_1fr_160px]">
           <a href="#about" className="group hidden items-center gap-4 text-white/50 transition hover:text-white lg:flex">
             <span className="flex h-10 w-6 items-start justify-center rounded-full border border-white/35 p-1.5">
               <motion.i animate={reduceMotion ? undefined : { y: [0, 12, 0] }} transition={{ duration: 1.8, repeat: Infinity }} className="h-1.5 w-1.5 rounded-full bg-[#c084fc]" />
@@ -338,7 +295,7 @@ function ProcessSection() {
   );
 }
 
-function TeamSection({ onBook }) {
+function TeamSection() {
   const railRef = useRef(null);
   const moveRail = (direction) => {
     railRef.current?.scrollBy({ left: direction * 310, behavior: "smooth" });
@@ -401,19 +358,6 @@ function TeamSection({ onBook }) {
             </motion.article>
           ))}
         </div>
-
-        <Reveal className="mt-16 flex flex-col items-center justify-between gap-6 rounded-[28px] border border-[#a855f7]/20 bg-[#12091b]/70 p-7 text-center backdrop-blur-xl md:flex-row md:p-10 md:text-left">
-          <div className="flex items-center gap-5">
-            <span className="hidden h-14 w-14 items-center justify-center rounded-full bg-[#a855f7]/12 text-[#d8b4fe] sm:flex"><UsersRound size={23} /></span>
-            <div>
-              <h3 className="font-display text-2xl font-bold">Have something raw?</h3>
-              <p className="mt-2 text-sm text-white/45">Let's turn it into work worth remembering.</p>
-            </div>
-          </div>
-          <MagneticButton onClick={onBook}>
-            Meet the studio <ArrowUpRight size={14} />
-          </MagneticButton>
-        </Reveal>
       </div>
     </section>
   );
@@ -446,7 +390,7 @@ export default function LandingPage() {
           <StorySection />
           <ExperienceSection />
           <ProcessSection />
-          <TeamSection onBook={openBooking} />
+          <TeamSection />
         </main>
         <Footer onBook={openBooking} />
         <BookingModal isOpen={bookingOpen} onClose={closeBooking} />
