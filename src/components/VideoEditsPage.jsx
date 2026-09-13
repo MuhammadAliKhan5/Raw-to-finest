@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowUpRight,
@@ -6,6 +6,7 @@ import {
   Clock3,
   Film,
   Layers,
+  Pause,
   Play,
   ShieldCheck,
   Sparkles,
@@ -149,6 +150,112 @@ const trustPoints = [
   { icon: ShieldCheck, label: "Unlimited within-scope revisions" },
   { icon: Layers, label: "Dedicated editing team" },
 ];
+
+const optimizedVideoUrl = (src) =>
+  src.replace(
+    "/video/upload/",
+    "/video/upload/q_auto:eco,f_auto,w_480/"
+  );
+
+const videoPosterUrl = (src) =>
+  src
+    .replace(
+      "/video/upload/",
+      "/video/upload/so_0,q_auto:eco,f_jpg,w_480/"
+    )
+    .replace(/\.mp4$/, ".jpg");
+
+function ViewportPortfolioVideo({ item, index }) {
+  const videoRef = useRef(null);
+  const [playing, setPlaying] = useState(false);
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !item.src) return undefined;
+
+    let visible = false;
+    let playTimer;
+
+    const syncPlayback = () => {
+      window.clearTimeout(playTimer);
+      if (visible && !document.hidden) {
+        // A short stagger avoids asking the browser to decode every clip in
+        // the same frame while still making the full fan autoplay together.
+        playTimer = window.setTimeout(() => {
+          video.play().catch(() => setPlaying(false));
+        }, index * 110);
+      } else {
+        video.pause();
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting;
+        syncPlayback();
+      },
+      { threshold: 0.3, rootMargin: "100px 0px" }
+    );
+
+    observer.observe(video);
+    document.addEventListener("visibilitychange", syncPlayback);
+
+    return () => {
+      window.clearTimeout(playTimer);
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", syncPlayback);
+      video.pause();
+    };
+  }, [item.src, index]);
+
+  if (!item.src) {
+    return (
+      <div className="absolute inset-0 flex items-center justify-center bg-[radial-gradient(circle_at_50%_35%,rgba(168,85,247,.28),transparent_45%),#0B1452]">
+        <Film size={24} className="text-white/35" />
+      </div>
+    );
+  }
+
+  const togglePlayback = (event) => {
+    event.stopPropagation();
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) video.play().catch(() => setPlaying(false));
+    else video.pause();
+  };
+
+  return (
+    <div className="absolute inset-0">
+      <video
+        ref={videoRef}
+        src={optimizedVideoUrl(item.src)}
+        poster={videoPosterUrl(item.src)}
+        aria-label={`${item.label} video preview`}
+        muted
+        loop
+        playsInline
+        preload="none"
+        disablePictureInPicture
+        className="h-full w-full object-cover"
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+        onError={() => {
+          setFailed(true);
+          setPlaying(false);
+        }}
+      />
+      <button
+        type="button"
+        onClick={togglePlayback}
+        aria-label={`${playing ? "Pause" : "Play"} ${item.label}`}
+        className="absolute right-2.5 top-2.5 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-xl transition duration-300 hover:scale-110"
+      >
+        {failed ? <Film size={12} /> : playing ? <Pause size={11} fill="currentColor" /> : <Play size={11} fill="currentColor" />}
+      </button>
+    </div>
+  );
+}
 
 function PriceCard({ plan, onBuy, index = 0 }) {
   return (
@@ -297,20 +404,8 @@ export default function VideoEditsPage() {
                     whileHover={{ y: -35, scale: 1.09, zIndex: 30, rotate: 0 }}
                     className="group absolute bottom-14 left-1/2 flex aspect-[9/16] w-[145px] -translate-x-1/2 items-end overflow-hidden rounded-[22px] border border-white/15 bg-[#0B1452] p-3 shadow-[0_30px_65px_-18px_rgba(0,0,0,.75)] md:w-[240px]"
                   >
-                    <video
-                      src={item.src}
-                      aria-label={`${item.label} video preview`}
-                      muted
-                      loop
-                      autoPlay
-                      playsInline
-                      preload="metadata"
-                      className="absolute inset-0 h-full w-full object-cover"
-                    />
+                    <ViewportPortfolioVideo item={item} index={index} />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#060A31] via-transparent to-black/10" />
-                    <span className="absolute right-2.5 top-2.5 flex h-8 w-8 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-xl transition duration-300 group-hover:scale-110 group-hover:rotate-12">
-                      <Play size={11} fill="currentColor" />
-                    </span>
                     <span className="label-mono relative text-[8px] uppercase leading-4 tracking-[0.08em] text-white/80">
                       <small className="mb-1 block text-[6px] tracking-[.2em] text-[var(--champagne)]">RAW TO FINEST / 0{index + 1}</small>
                       {item.label}

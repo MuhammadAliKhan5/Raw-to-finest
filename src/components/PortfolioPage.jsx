@@ -4,6 +4,7 @@ import {
   ArrowUpRight,
   Clapperboard,
   Palette,
+  Pause,
   Play,
   Volume2,
   VolumeX,
@@ -83,32 +84,32 @@ const graphicDesignItems = [
 
 const videoEditItems = [
   {
-    src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789216207/ednxjhlhnrjzbh3f3kzu.mp4",
+    src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/q_auto,f_auto,w_720/v1789216207/ednxjhlhnrjzbh3f3kzu.mp4",
     title: "Brand reel",
     tag: "SOCIAL EDIT",
   },
   {
-    src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789216189/sdiszag91gehxzxitzgu.mp4",
+    src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/q_auto,f_auto,w_720/v1789216189/sdiszag91gehxzxitzgu.mp4",
     title: "Campaign cut",
     tag: "CAMPAIGN",
   },
   {
-    src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789216202/gsupf1ktfcocucqmxh0g.mp4",
+    src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/q_auto,f_auto,w_720/v1789216202/gsupf1ktfcocucqmxh0g.mp4",
     title: "Product edit",
     tag: "PRODUCT CUT",
   },
   {
-    src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789216205/ckyuminrusxxgyalv7h5.mp4",
+    src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/q_auto,f_auto,w_720/v1789216205/ckyuminrusxxgyalv7h5.mp4",
     title: "Founder story",
     tag: "TALKING HEAD",
   },
   {
-    src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789216190/kxw2zd1rnd8ksarcjxdy.mp4",
+    src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/q_auto,f_auto,w_720/v1789216190/kxw2zd1rnd8ksarcjxdy.mp4",
     title: "Lifestyle reel",
     tag: "LIFESTYLE",
   },
    {
-    src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789216208/icnqiktzcyzmcetfnkg7.mp4",
+    src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/q_auto,f_auto,w_720/v1789216208/icnqiktzcyzmcetfnkg7.mp4",
     title: "Podcast reel",
     tag: "PODCAST CUT",
   },
@@ -124,11 +125,96 @@ const webDesignItems = [
 ];
 
 const heroVisuals = [
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789217637/lvuv1paikqi09dxwca1o.mp4", title: "Interface art direction" },
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789220566/pxjgac3szzder7yxuaql.mp4", title: "Brand design workspace" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/q_auto,f_auto,w_720/v1789217637/lvuv1paikqi09dxwca1o.mp4", title: "Interface art direction" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/q_auto,f_auto,w_720/v1789220566/pxjgac3szzder7yxuaql.mp4", title: "Brand design workspace" },
 ];
 
 const heroVideos = videoEditItems.slice(0, 2);
+
+const getVideoPoster = (src) =>
+  src
+    .replace(
+      "/video/upload/q_auto,f_auto,w_720/",
+      "/video/upload/so_0,q_auto,f_jpg,w_720/"
+    )
+    .replace(/\.mp4$/, ".jpg");
+
+function useViewportPlayback(videoRef, threshold = 0.35) {
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return undefined;
+
+    let visible = false;
+    const syncPlayback = () => {
+      if (visible && !document.hidden) {
+        video.play().catch(() => undefined);
+      } else {
+        video.pause();
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting;
+        syncPlayback();
+      },
+      { threshold, rootMargin: "80px 0px" }
+    );
+
+    observer.observe(video);
+    document.addEventListener("visibilitychange", syncPlayback);
+
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", syncPlayback);
+      video.pause();
+    };
+  }, [videoRef, threshold]);
+}
+
+function ViewportVideo({ src, label, className = "", interactive = false }) {
+  const videoRef = useRef(null);
+  const [playing, setPlaying] = useState(false);
+  useViewportPlayback(videoRef);
+
+  const toggle = (event) => {
+    if (!interactive) return;
+    event.preventDefault();
+    event.stopPropagation();
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) video.play().catch(() => undefined);
+    else video.pause();
+  };
+
+  return (
+    <div className="relative h-full w-full">
+      <video
+        ref={videoRef}
+        src={src}
+        poster={getVideoPoster(src)}
+        aria-label={label}
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        className={className}
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+      />
+      {interactive && (
+        <button
+          type="button"
+          onClick={toggle}
+          aria-label={`${playing ? "Pause" : "Play"} ${label}`}
+          className="absolute bottom-3 left-3 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/60 text-white backdrop-blur-md"
+        >
+          {playing ? <Pause size={12} fill="currentColor" /> : <Play size={12} fill="currentColor" />}
+        </button>
+      )}
+    </div>
+  );
+}
 
 const fullSpreadVisuals = [
   {
@@ -161,31 +247,12 @@ const fullSpreadVisuals = [
   },
 ];
 
-function VideoCard({ item, index = 0, active = false }) {
+function VideoCard({ item, index = 0 }) {
   const videoRef = useRef(null);
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(true);
-  const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    if (active) {
-      video.play().catch(() => setPlaying(false));
-    } else {
-      video.pause();
-    }
-  }, [active]);
-
-  const startWhenReady = () => {
-    setReady(true);
-    setFailed(false);
-    if (active) {
-      videoRef.current?.play().catch(() => setPlaying(false));
-    }
-  };
+  useViewportPlayback(videoRef);
 
   const toggle = () => {
     const video = videoRef.current;
@@ -221,7 +288,7 @@ function VideoCard({ item, index = 0, active = false }) {
         duration: 0.5,
         delay: index * 0.05,
       }}
-      className="flex justify-center"
+      className="flex h-full justify-center"
     >
       <div
         onClick={toggle}
@@ -237,7 +304,7 @@ function VideoCard({ item, index = 0, active = false }) {
         className="
           relative
           w-full
-          max-w-[280px]
+          aspect-[4/5]
           overflow-hidden
           rounded-2xl
           border border-white/10
@@ -249,11 +316,11 @@ function VideoCard({ item, index = 0, active = false }) {
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_50%_35%,rgba(168,85,247,.24),transparent_42%),linear-gradient(155deg,#12091b,#030306)]">
           <div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(255,255,255,.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.08)_1px,transparent_1px)] [background-size:24px_24px]" />
           <div className="relative flex flex-col items-center gap-3 text-center">
-            <span className={`flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/[.06] text-[#d8b4fe] backdrop-blur-xl ${!ready && !failed ? "animate-pulse" : ""}`}>
+            <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/[.06] text-[#d8b4fe] backdrop-blur-xl">
               {failed ? <Clapperboard size={18} /> : <Play size={17} fill="currentColor" />}
             </span>
             <span className="text-[8px] font-semibold uppercase tracking-[.2em] text-white/45">
-              {failed ? "Preview unavailable" : "Loading preview"}
+              {failed ? "Preview unavailable" : "Play preview"}
             </span>
           </div>
         </div>
@@ -261,18 +328,16 @@ function VideoCard({ item, index = 0, active = false }) {
         <video
           ref={videoRef}
           src={item.src}
+          poster={getVideoPoster(item.src)}
           aria-label={`${item.title} video preview`}
-          className={`relative block aspect-[9/16] w-full object-cover transition-opacity duration-500 ${ready ? "opacity-100" : "opacity-0"}`}
+          className="relative block h-full w-full object-cover"
           muted={muted}
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           disablePictureInPicture
-          onLoadedData={startWhenReady}
-          onCanPlay={startWhenReady}
           onError={() => {
             setFailed(true);
-            setReady(false);
             setPlaying(false);
           }}
           onPlay={() => setPlaying(true)}
@@ -316,38 +381,10 @@ export default function PortfolioPage() {
   useReveal();
 
   const [bookingOpen, setBookingOpen] = useState(false);
-  const [videoSectionActive, setVideoSectionActive] = useState(false);
-  const videoSectionRef = useRef(null);
 
   useEffect(() => {
     document.body.classList.add("raw-to-finess-page");
     return () => document.body.classList.remove("raw-to-finess-page");
-  }, []);
-
-  useEffect(() => {
-    const section = videoSectionRef.current;
-    if (!section) return;
-
-    let sectionIsVisible = false;
-    const syncPlayback = () => {
-      setVideoSectionActive(sectionIsVisible && !document.hidden);
-    };
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        sectionIsVisible = entry.isIntersecting;
-        syncPlayback();
-      },
-      { threshold: 0.05, rootMargin: "0px 0px -12% 0px" }
-    );
-
-    observer.observe(section);
-    document.addEventListener("visibilitychange", syncPlayback);
-
-    return () => {
-      observer.disconnect();
-      document.removeEventListener("visibilitychange", syncPlayback);
-    };
   }, []);
 
   const openBooking = () => setBookingOpen(true);
@@ -412,19 +449,12 @@ export default function PortfolioPage() {
                     transition={{ duration: 6 + index, repeat: Infinity, ease: "easeInOut" }}
                     className={`absolute overflow-hidden rounded-[28px] border border-white/15 bg-white/5 p-2 shadow-[0_35px_90px_rgba(0,0,0,.45)] ${index === 0 ? "left-[8%] top-[4%] h-[360px] w-[270px] -rotate-6" : "right-[2%] top-[16%] h-[330px] w-[245px] rotate-6"}`}
                   >
-                    <video
+                    <ViewportVideo
                       src={item.src}
-                      aria-label={`${item.title} portfolio preview`}
-                      muted
-                      loop
-                      autoPlay
-                      playsInline
-                      preload="metadata"
+                      label={`${item.title} portfolio preview`}
+                      interactive
                       className="h-full w-full rounded-[21px] object-cover"
                     />
-                    <span className="absolute bottom-4 left-4 flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-black/55 text-white backdrop-blur-md">
-                      <Play size={10} fill="currentColor" />
-                    </span>
                   </motion.div>
                 ))}
                 <div className="absolute right-8 top-0 rounded-full border border-white/15 bg-[#201032]/80 px-4 py-2 label-mono text-[8px] uppercase tracking-[.2em] text-white/60 backdrop-blur-xl">Selected work / 2026</div>
@@ -473,14 +503,9 @@ export default function PortfolioPage() {
                   >
                     <div className="relative h-[64%] overflow-hidden rounded-[20px] border border-white/[.07] bg-[#0a060d]">
                       {visual.type === "video" ? (
-                        <video
+                        <ViewportVideo
                           src={visual.src}
-                          aria-label={visual.alt}
-                          muted
-                          loop
-                          autoPlay
-                          playsInline
-                          preload="metadata"
+                          label={visual.alt}
                           className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                         />
                       ) : (
@@ -519,36 +544,44 @@ export default function PortfolioPage() {
           </section>
 
           {/* ================= WEB DESIGN ================= */}
-          <section id="web-design" className="menu-section relative overflow-hidden bg-[#EEF7FF] text-[#07102F]">
+          <section id="web-design" className="portfolio-service-section menu-section relative overflow-hidden bg-[#EEF7FF] text-[#07102F]">
             <div className="absolute inset-0 opacity-60 [background-image:radial-gradient(circle_at_20%_10%,rgba(23,104,255,.22),transparent_34%),radial-gradient(circle_at_85%_75%,rgba(110,231,255,.2),transparent_30%)]" />
-            <div className="relative mx-auto max-w-[1480px] px-5 py-20 md:px-10 md:py-28">
+            <div className="portfolio-service-inner relative mx-auto max-w-[1480px] px-5 py-20 md:px-10 md:py-28">
               <Reveal className="text-center">
-                <SectionLabel>03 / DIGITAL EXPERIENCES</SectionLabel>
-                <h2 className="mt-5 font-display text-[clamp(2.8rem,7vw,6rem)] font-bold uppercase leading-[.9]">Web Design</h2>
+                <div className="mb-4 flex justify-center">
+                  <GlassPill dark>
+                    <GlobeIcon size={11} className="mr-1 inline -translate-y-px" />
+                    DIGITAL EXPERIENCES
+                  </GlassPill>
+                </div>
+                <h2 className="menu-heading">WEB DESIGN</h2>
                 <p className="mx-auto mt-5 max-w-[560px] text-sm leading-7 text-[#07102F]/50">Conversion-minded websites shaped with clear hierarchy, distinctive art direction and smooth interactions.</p>
               </Reveal>
-              <RevealGroup className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                {webDesignItems.map((item, index) => (
-                  <GsapScrollReveal key={item.src} direction={index % 3 === 0 ? "left" : index % 3 === 2 ? "right" : "up"} index={index}>
-                    <motion.article key={item.src} initial={{ opacity: 0, x: index % 3 === 0 ? -150 : index % 3 === 2 ? 150 : 0, y: index % 3 === 1 ? 120 : 35, rotateY: index % 3 === 0 ? -20 : index % 3 === 2 ? 20 : 0, scale: .88 }} whileInView={{ opacity: 1, x: 0, y: 0, rotateY: 0, scale: 1 }} viewport={{ once: true, amount: .3 }} transition={{ type: "spring", stiffness: 105, damping: 16, delay: (index % 3) * .12 }} whileHover={{ y: -12, rotate: index % 2 ? .8 : -.8, scale: 1.015 }} className="group overflow-hidden rounded-[26px] border border-[#07102F]/10 bg-white p-3 shadow-none">
-                      <div className="aspect-[16/11] overflow-hidden rounded-[19px]"><img src={item.src} alt={`${item.title} web design concept`} loading="lazy" className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]" /></div>
-                      <div className="flex items-end justify-between gap-4 px-2 pb-2 pt-5"><div><span className="label-mono text-[7px] tracking-[.18em] text-[var(--violet)]">{item.tag}</span><h3 className="mt-1 font-display text-xl font-bold">{item.title}</h3></div><span className="h-3 w-3 rounded-full" style={{ background: item.accent }} /></div>
-                    </motion.article>
-                  </GsapScrollReveal>
-                ))}
-              </RevealGroup>
+              <Reveal delay={0.1}>
+                <div className="menu-card relative mx-auto mt-10 max-w-[1080px] overflow-hidden rounded-[30px] border-[3px] border-[#07102F]/15 bg-[#EEF8FF] p-4 shadow-none md:mt-14 md:p-6">
+                  <RevealGroup className="portfolio-service-grid grid grid-cols-2 gap-4 md:grid-cols-3">
+                    {webDesignItems.map((item, index) => (
+                      <GsapScrollReveal key={item.src} className="h-full" direction={index % 3 === 0 ? "left" : index % 3 === 2 ? "right" : "up"} index={index}>
+                        <motion.article initial={{ opacity: 0, y: 35, scale: .92 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, amount: .15 }} whileHover={{ y: -5 }} transition={{ type: "spring", stiffness: 260, damping: 22, delay: index * .05 }} className="portfolio-service-card group relative flex aspect-[4/5] h-full flex-col overflow-hidden rounded-2xl border-2 border-[#07102F]/10 bg-white p-2 shadow-none">
+                          <div className="min-h-0 flex-1 overflow-hidden rounded-xl"><img src={item.src} alt={`${item.title} web design concept`} loading="lazy" decoding="async" className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]" /></div>
+                          <div className="flex min-h-[64px] items-end justify-between gap-2 px-2 pb-1 pt-3"><div className="min-w-0"><span className="label-mono block truncate text-[7px] tracking-[.18em] text-[var(--violet)]">{item.tag}</span><h3 className="mt-1 truncate font-display text-sm font-bold md:text-base">{item.title}</h3></div><span className="mb-1 h-3 w-3 shrink-0 rounded-full" style={{ background: item.accent }} /></div>
+                        </motion.article>
+                      </GsapScrollReveal>
+                    ))}
+                  </RevealGroup>
+                </div>
+              </Reveal>
             </div>
             <Divider variant="arc" fill="#060A31" />
           </section>
 
           {/* ================= VIDEO EDITS ================= */}
           <section
-            ref={videoSectionRef}
             id="video-edits"
-            className="menu-section relative overflow-hidden"
+            className="portfolio-service-section menu-section relative overflow-hidden"
             style={{ background: "#0A1748" }}
           >
-            <div className="relative mx-auto max-w-[1480px] px-5 py-20 md:px-10 md:py-28">
+            <div className="portfolio-service-inner relative mx-auto max-w-[1480px] px-5 py-20 md:px-10 md:py-28">
               <Reveal className="text-center">
                 <div className="mb-4 flex justify-center">
                   <GlassPill>
@@ -557,14 +590,15 @@ export default function PortfolioPage() {
                   </GlassPill>
                 </div>
                 <h2 className="menu-heading menu-heading-light">VIDEO EDITS</h2>
+                <p className="mx-auto mt-5 max-w-[560px] text-sm leading-7 text-white/50">Story-led edits built for retention, clarity and polished delivery across every major platform.</p>
               </Reveal>
 
               <Reveal delay={0.1}>
                 <div className="menu-card relative mx-auto mt-10 max-w-[1080px] overflow-hidden rounded-[30px] border-[3px] border-[#07102F]/15 bg-[#EEF8FF] p-4 shadow-[0_25px_60px_-20px_rgba(0,0,0,.35)] md:mt-14 md:p-6">
-                  <RevealGroup className="grid grid-cols-3 gap-3 md:gap-4">
+                  <RevealGroup className="portfolio-service-grid grid grid-cols-2 gap-4 md:grid-cols-3">
                     {videoEditItems.map((item, index) => (
-                      <GsapScrollReveal key={item.src + index} direction={index % 3 === 0 ? "left" : index % 3 === 2 ? "right" : "up"} index={index}>
-                        <VideoCard item={item} index={index} active={videoSectionActive} />
+                      <GsapScrollReveal key={item.src + index} className="h-full" direction={index % 3 === 0 ? "left" : index % 3 === 2 ? "right" : "up"} index={index}>
+                        <VideoCard item={item} index={index} />
                       </GsapScrollReveal>
                     ))}
                   </RevealGroup>
@@ -572,7 +606,7 @@ export default function PortfolioPage() {
               </Reveal>
 
               <p className="label-mono mt-6 text-center text-[8px] uppercase tracking-[0.2em] text-white/35">
-                Tap a clip to pause · tap the speaker to unmute
+                Videos autoplay while visible · tap a clip to pause · tap the speaker to unmute
               </p>
             </div>
 
@@ -582,10 +616,10 @@ export default function PortfolioPage() {
           {/* ================= GRAPHIC DESIGN ================= */}
           <section
             id="graphic-design"
-            className="menu-section relative overflow-hidden"
+            className="portfolio-service-section menu-section relative overflow-hidden"
             style={{ background: "#1646D8" }}
           >
-            <div className="relative mx-auto max-w-[1480px] px-5 py-20 md:px-10 md:py-28">
+            <div className="portfolio-service-inner relative mx-auto max-w-[1480px] px-5 py-20 md:px-10 md:py-28">
               <Reveal className="text-center">
                 <div className="mb-4 flex justify-center">
                   <GlassPill dark>
@@ -594,11 +628,12 @@ export default function PortfolioPage() {
                   </GlassPill>
                 </div>
                 <h2 className="menu-heading">GRAPHIC DESIGN</h2>
+                <p className="mx-auto mt-5 max-w-[560px] text-sm leading-7 text-white/50">Consistent campaign visuals shaped to make your brand recognizable across every touchpoint.</p>
               </Reveal>
 
               <Reveal delay={0.1}>
                 <div className="menu-card relative mx-auto mt-10 max-w-[1080px] overflow-hidden rounded-[30px] border-[3px] border-[#07102F]/15 bg-[#EEF8FF] p-4 shadow-none md:mt-14 md:p-6">
-                  <RevealGroup className="grid grid-cols-2 items-start gap-4 md:grid-cols-3">
+                  <RevealGroup className="portfolio-service-grid grid grid-cols-2 gap-4 md:grid-cols-3">
                     {graphicDesignItems.map((item, index) => (
                       <motion.div
                         key={item.title + index}
@@ -607,12 +642,12 @@ export default function PortfolioPage() {
                         viewport={{ once: true, amount: .15 }}
                         whileHover={{ y: -5 }}
                         transition={{ type: "spring", stiffness: 260, damping: 22, delay: index * .05 }}
-                        className={`group relative overflow-hidden rounded-2xl border-2 border-[#07102F]/10 bg-white shadow-none ${item.aspect}`}
+                        className="portfolio-service-card group relative aspect-[4/5] overflow-hidden rounded-2xl border-2 border-[#07102F]/10 bg-white shadow-none"
                       >
                         <img
                           src={item.src}
                           alt={item.title}
-                          loading="eager"
+                          loading="lazy"
                           decoding="async"
                           className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]"
                         />

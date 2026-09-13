@@ -10,6 +10,7 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import { Link } from "react-router-dom";
+import { createPortal } from "react-dom";
 import emailjs from "@emailjs/browser";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -1016,6 +1017,7 @@ export function BookingModal({ isOpen, onClose }) {
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [bookingError, setBookingError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [mobileStep, setMobileStep] = useState("schedule");
 
   const [calendarDate, setCalendarDate] = useState(() => new Date());
   const [selectedDate, setSelectedDate] = useState(null);
@@ -1046,18 +1048,37 @@ export function BookingModal({ isOpen, onClose }) {
 
   useEffect(() => {
     let resetFrame;
+    const scrollPosition = window.scrollY;
+    const previousBodyStyles = {
+      overflow: document.body.style.overflow,
+      position: document.body.style.position,
+      top: document.body.style.top,
+      width: document.body.style.width,
+    };
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+
     if (isOpen) {
       resetFrame = requestAnimationFrame(() => {
         setBookingSuccess(false);
         setBookingError("");
+        setMobileStep("schedule");
       });
+      document.documentElement.classList.add("booking-modal-open");
+      document.documentElement.style.overflow = "hidden";
       document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollPosition}px`;
+      document.body.style.width = "100%";
     } else {
-      document.body.style.overflow = "";
+      document.documentElement.classList.remove("booking-modal-open");
     }
+
     return () => {
       if (resetFrame) cancelAnimationFrame(resetFrame);
-      document.body.style.overflow = "";
+      document.documentElement.classList.remove("booking-modal-open");
+      document.documentElement.style.overflow = previousHtmlOverflow;
+      Object.assign(document.body.style, previousBodyStyles);
+      if (isOpen) window.scrollTo(0, scrollPosition);
     };
   }, [isOpen]);
 
@@ -1143,7 +1164,7 @@ export function BookingModal({ isOpen, onClose }) {
     }
   };
 
-  return (
+  const modal = (
     <AnimatePresence>
       {isOpen && (
         <motion.div
@@ -1151,7 +1172,7 @@ export function BookingModal({ isOpen, onClose }) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-[120] overflow-y-auto bg-[#050308]/82 p-3 backdrop-blur-2xl md:p-6"
+          className="fixed inset-0 z-[120] flex items-center justify-center overflow-hidden bg-[#050308]/82 p-2 backdrop-blur-2xl md:p-4"
           onMouseDown={(event) => {
             if (event.target === event.currentTarget) onClose?.();
           }}
@@ -1161,20 +1182,20 @@ export function BookingModal({ isOpen, onClose }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 18, scale: 0.98 }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="booking-shell mx-auto my-4 max-w-[1220px] overflow-hidden rounded-[34px] border border-white/10 bg-[var(--cream)] text-[#07102F] shadow-[0_40px_140px_rgba(0,0,0,.7)] md:my-10"
+            className="booking-shell mx-auto max-h-[calc(100dvh-1rem)] w-full max-w-[1100px] overflow-hidden rounded-[26px] border border-white/10 bg-[var(--cream)] text-[#07102F] shadow-[0_40px_140px_rgba(0,0,0,.7)] md:max-h-[calc(100dvh-2rem)]"
           >
             <div className="relative">
               <button
                 type="button"
                 onClick={onClose}
-                className="absolute right-4 top-4 z-30 flex h-10 w-10 items-center justify-center rounded-full bg-[#07102F] text-white transition hover:bg-[var(--violet)]"
+                className="absolute right-3 top-3 z-30 flex h-9 w-9 items-center justify-center rounded-full bg-[#07102F] text-white transition hover:bg-[var(--violet)]"
                 aria-label="Close booking"
               >
                 <X size={17} />
               </button>
 
               {bookingSuccess ? (
-                <div className="flex min-h-[650px] items-center justify-center px-6 py-20 text-center">
+                <div className="flex min-h-[min(620px,calc(100dvh-2rem))] items-center justify-center px-6 py-12 text-center">
                   <div className="max-w-[560px]">
                     <motion.div
                       initial={{ opacity: 0, scale: 0.5, rotate: -15 }}
@@ -1209,25 +1230,25 @@ export function BookingModal({ isOpen, onClose }) {
                   </div>
                 </div>
               ) : (
-                <div className="grid lg:grid-cols-[.7fr_1.3fr]">
-                  <div className="relative overflow-hidden bg-[#12091b] p-7 text-white md:p-10 lg:p-12">
+                <div className="grid lg:grid-cols-[230px_1fr]">
+                  <div className="relative hidden overflow-hidden bg-[#12091b] p-6 text-white lg:block">
                     <div className="absolute -right-32 -top-24 h-[500px] w-[500px] rounded-full bg-[var(--violet)]/22 blur-[100px]" />
                     <div className="absolute -bottom-32 -left-32 h-[400px] w-[400px] rounded-full bg-[var(--champagne)]/8 blur-[90px]" />
 
                     <div className="relative">
                       <GlassPill>Book a consultation</GlassPill>
 
-                      <h2 className="mt-8 font-display text-[clamp(3.3rem,6.6vw,6.6rem)] font-bold leading-[0.83] tracking-[-0.07em]">
+                      <h2 className="mt-6 font-display text-4xl font-bold leading-[0.86] tracking-[-0.06em]">
                         Let's talk
                         <br />
                         <span className="gradient-text-hero font-editorial italic">projects.</span>
                       </h2>
 
-                      <p className="mt-7 max-w-[390px] text-sm leading-7 text-white/38">
+                      <p className="mt-5 max-w-[390px] text-xs leading-6 text-white/45">
                         Pick a future date and time, tell us where you want to go, and we'll take it from there.
                       </p>
 
-                      <div className="mt-10 space-y-5 border-t border-white/10 pt-7">
+                      <div className="mt-6 space-y-4 border-t border-white/10 pt-5">
                         <div className="flex gap-3">
                           <CalendarDays size={18} className="text-[var(--champagne)]" />
                           <div>
@@ -1253,9 +1274,13 @@ export function BookingModal({ isOpen, onClose }) {
                     </div>
                   </div>
 
-                  <form onSubmit={submitBooking} className="p-6 md:p-10">
-                    <div className="grid gap-9 lg:grid-cols-2">
-                      <div>
+                  <form onSubmit={submitBooking} className="p-4 md:p-5 lg:p-6">
+                    <div className="mb-3 flex gap-2 pr-11 md:hidden" aria-label="Booking steps">
+                      <button type="button" onClick={() => setMobileStep("schedule")} className={`flex-1 rounded-full px-3 py-2 text-[10px] font-semibold ${mobileStep === "schedule" ? "bg-[var(--violet)] text-white" : "bg-white/10 text-white/55"}`}>1. Date & time</button>
+                      <button type="button" onClick={() => selectedDate && selectedTime && setMobileStep("details")} className={`flex-1 rounded-full px-3 py-2 text-[10px] font-semibold ${mobileStep === "details" ? "bg-[var(--violet)] text-white" : "bg-white/10 text-white/55"}`}>2. Your details</button>
+                    </div>
+                    <div className="grid gap-5 md:grid-cols-[.9fr_1.1fr]">
+                      <div className={mobileStep === "schedule" ? "block" : "hidden md:block"}>
                         <div className="flex items-center justify-between">
                           <div>
                             <div className="label-mono text-[8px] tracking-[0.2em] text-[#07102F]/35">Select a date</div>
@@ -1281,9 +1306,9 @@ export function BookingModal({ isOpen, onClose }) {
                           </div>
                         </div>
 
-                        <div className="mt-6 grid grid-cols-7 gap-1">
+                        <div className="mt-3 grid grid-cols-7 gap-1">
                           {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-                            <div key={day} className="label-mono py-2 text-center text-[7px] tracking-[0.12em] text-[#07102F]/25">
+                            <div key={day} className="label-mono py-1 text-center text-[7px] tracking-[0.12em] text-[#07102F]/25">
                               {day}
                             </div>
                           ))}
@@ -1303,7 +1328,7 @@ export function BookingModal({ isOpen, onClose }) {
                                     setBookingError("");
                                   }
                                 }}
-                                className={`calendar-day relative aspect-square rounded-xl text-xs font-bold transition ${!date
+                                className={`calendar-day relative h-8 rounded-lg text-xs font-bold transition md:h-9 ${!date
                                     ? ""
                                     : past
                                       ? "cursor-not-allowed text-[#07102F]/10"
@@ -1321,20 +1346,20 @@ export function BookingModal({ isOpen, onClose }) {
                           })}
                         </div>
 
-                        <div className="label-mono mt-5 rounded-xl border border-[var(--violet)]/10 bg-[var(--violet)]/[0.04] px-4 py-3 text-[7px] tracking-[0.12em] text-[#07102F]/30">
+                        <div className="label-mono mt-3 rounded-lg border border-[var(--violet)]/10 bg-[var(--violet)]/[0.04] px-3 py-2 text-[7px] tracking-[0.12em] text-[#07102F]/30">
                           Previous dates are visible for reference and cannot be selected.
                         </div>
 
-                        <div className="mt-7">
-                          <div className="label-mono mb-3 text-[8px] tracking-[0.2em] text-[#07102F]/35">Select a time</div>
-                          <div className="grid grid-cols-2 gap-2">
+                        <div className="mt-3">
+                          <div className="label-mono mb-2 text-[8px] tracking-[0.2em] text-[#07102F]/35">Select a time</div>
+                          <div className="grid grid-cols-4 gap-1.5">
                             {timeSlots.map((time) => (
                               <button
                                 type="button"
                                 key={time}
                                 disabled={!selectedDate}
                                 onClick={() => setSelectedTime(time)}
-                                className={`rounded-xl border px-3 py-3 text-[9px] font-bold transition ${selectedTime === time
+                                className={`rounded-lg border px-1 py-2 text-[8px] font-bold transition ${selectedTime === time
                                     ? "border-[var(--violet)] bg-[var(--violet)] text-white"
                                     : selectedDate
                                       ? "border-[var(--violet)]/10 bg-white hover:border-[var(--violet)]/30 hover:bg-[#B4E9FF]"
@@ -1346,56 +1371,78 @@ export function BookingModal({ isOpen, onClose }) {
                             ))}
                           </div>
                         </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (!selectedDate || !selectedTime) {
+                              setBookingError("Please select a date and meeting time.");
+                              return;
+                            }
+                            setBookingError("");
+                            setMobileStep("details");
+                          }}
+                          className="mt-3 w-full rounded-lg bg-[var(--violet)] px-4 py-2.5 text-[10px] font-semibold text-white md:hidden"
+                        >
+                          Continue to your details
+                        </button>
+                        {bookingError && mobileStep === "schedule" && (
+                          <div className="mt-2 rounded-lg border border-red-400/25 bg-red-500/10 px-3 py-2 text-[10px] font-semibold text-red-300 md:hidden">
+                            {bookingError}
+                          </div>
+                        )}
                       </div>
 
-                      <div>
-                        <div className="label-mono text-[8px] tracking-[0.2em] text-[#07102F]/35">Your details</div>
+                      <div className={mobileStep === "details" ? "block" : "hidden md:block"}>
+                        <div className="flex items-center justify-between">
+                          <div className="label-mono text-[8px] tracking-[0.2em] text-[#07102F]/35">Your details</div>
+                          <button type="button" onClick={() => setMobileStep("schedule")} className="text-[10px] font-semibold text-[var(--orchid)] md:hidden">Back to schedule</button>
+                        </div>
 
-                        <div className="mt-5 space-y-4">
+                        <div className="mt-3 grid grid-cols-2 gap-x-3 gap-y-2">
                           <label className="block">
-                            <span className="mb-2 block text-xs font-bold">Full name</span>
+                            <span className="mb-1 block text-[10px] font-bold">Full name</span>
                             <div className="relative">
-                              <UserRound size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#07102F]/25" />
+                              <UserRound size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#07102F]/25" />
                               <input
                                 required
                                 value={form.name}
                                 onChange={(e) => updateForm("name", e.target.value)}
                                 placeholder="Your name"
-                                className="booking-input w-full rounded-xl border border-[var(--violet)]/10 bg-white px-11 py-3.5 text-sm outline-none transition focus:border-[var(--violet)] focus:ring-4 focus:ring-[var(--violet)]/8"
+                                className="booking-input w-full rounded-lg border border-[var(--violet)]/10 bg-white py-2 pl-9 pr-3 text-xs outline-none transition focus:border-[var(--violet)] focus:ring-4 focus:ring-[var(--violet)]/8"
                               />
                             </div>
                           </label>
 
                           <label className="block">
-                            <span className="mb-2 block text-xs font-bold">Email</span>
+                            <span className="mb-1 block text-[10px] font-bold">Email</span>
                             <input
                               required
                               type="email"
                               value={form.email}
                               onChange={(e) => updateForm("email", e.target.value)}
                               placeholder="you@example.com"
-                              className="booking-input w-full rounded-xl border border-[var(--violet)]/10 bg-white px-4 py-3.5 text-sm outline-none transition focus:border-[var(--violet)] focus:ring-4 focus:ring-[var(--violet)]/8"
+                              className="booking-input w-full rounded-lg border border-[var(--violet)]/10 bg-white px-3 py-2 text-xs outline-none transition focus:border-[var(--violet)] focus:ring-4 focus:ring-[var(--violet)]/8"
                             />
                           </label>
 
                           <label className="block">
-                            <span className="mb-2 block text-xs font-bold">Phone</span>
+                            <span className="mb-1 block text-[10px] font-bold">Phone</span>
                             <input
                               required
                               value={form.phone}
                               onChange={(e) => updateForm("phone", e.target.value)}
                               placeholder="+92 300 1234567"
-                              className="booking-input w-full rounded-xl border border-[var(--violet)]/10 bg-white px-4 py-3.5 text-sm outline-none transition focus:border-[var(--violet)] focus:ring-4 focus:ring-[var(--violet)]/8"
+                              className="booking-input w-full rounded-lg border border-[var(--violet)]/10 bg-white px-3 py-2 text-xs outline-none transition focus:border-[var(--violet)] focus:ring-4 focus:ring-[var(--violet)]/8"
                             />
                           </label>
 
                           <label className="block">
-                            <span className="mb-2 block text-xs font-bold">What do you need?</span>
+                            <span className="mb-1 block text-[10px] font-bold">What do you need?</span>
                             <select
                               required
                               value={form.goal}
                               onChange={(e) => updateForm("goal", e.target.value)}
-                              className="booking-input w-full rounded-xl border border-[var(--violet)]/10 bg-white px-4 py-3.5 text-sm outline-none transition focus:border-[var(--violet)] focus:ring-4 focus:ring-[var(--violet)]/8"
+                              className="booking-input w-full rounded-lg border border-[var(--violet)]/10 bg-white px-3 py-2 text-xs outline-none transition focus:border-[var(--violet)] focus:ring-4 focus:ring-[var(--violet)]/8"
                             >
                               <option value="">Select a service</option>
                               <option value="Graphic design">Graphic design</option>
@@ -1407,12 +1454,12 @@ export function BookingModal({ isOpen, onClose }) {
                           </label>
 
                           <label className="block">
-                            <span className="mb-2 block text-xs font-bold">Project timeline</span>
+                            <span className="mb-1 block text-[10px] font-bold">Project timeline</span>
                             <select
                               required
                               value={form.experience}
                               onChange={(e) => updateForm("experience", e.target.value)}
-                              className="booking-input w-full rounded-xl border border-[var(--violet)]/10 bg-white px-4 py-3.5 text-sm outline-none transition focus:border-[var(--violet)] focus:ring-4 focus:ring-[var(--violet)]/8"
+                              className="booking-input w-full rounded-lg border border-[var(--violet)]/10 bg-white px-3 py-2 text-xs outline-none transition focus:border-[var(--violet)] focus:ring-4 focus:ring-[var(--violet)]/8"
                             >
                               <option value="">Select a timeline</option>
                               <option value="ASAP">ASAP</option>
@@ -1421,27 +1468,27 @@ export function BookingModal({ isOpen, onClose }) {
                             </select>
                           </label>
 
-                          <label className="block">
-                            <span className="mb-2 block text-xs font-bold">Tell us about your project</span>
+                          <label className="col-span-2 block">
+                            <span className="mb-1 block text-[10px] font-bold">Tell us about your project</span>
                             <textarea
-                              rows={3}
+                              rows={2}
                               value={form.message}
                               onChange={(e) => updateForm("message", e.target.value)}
                               placeholder="What are you trying to create?"
-                              className="booking-input w-full resize-none rounded-xl border border-[var(--violet)]/10 bg-white px-4 py-3.5 text-sm outline-none transition focus:border-[var(--violet)] focus:ring-4 focus:ring-[var(--violet)]/8"
+                              className="booking-input w-full resize-none rounded-lg border border-[var(--violet)]/10 bg-white px-3 py-2 text-xs outline-none transition focus:border-[var(--violet)] focus:ring-4 focus:ring-[var(--violet)]/8"
                             />
                           </label>
                         </div>
 
                         {bookingError && (
-                          <div className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-xs font-bold leading-5 text-red-600">
+                          <div className="mt-2 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-[10px] font-bold leading-4 text-red-600">
                             {bookingError}
                           </div>
                         )}
 
-                        <div className="mt-4 rounded-xl border border-[var(--violet)]/10 bg-[var(--violet)]/[0.04] p-4">
+                        <div className="mt-2 rounded-lg border border-[var(--violet)]/10 bg-[var(--violet)]/[0.04] px-3 py-2">
                           <div className="label-mono text-[7px] tracking-[0.2em] text-[#07102F]/30">Appointment</div>
-                          <div className="mt-2 text-xs font-bold">
+                          <div className="mt-1 text-[10px] font-bold">
                             {selectedDate
                               ? selectedDate.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric" })
                               : "Choose a date"}
@@ -1457,7 +1504,7 @@ export function BookingModal({ isOpen, onClose }) {
                         <button
                           type="submit"
                           disabled={submitting}
-                          className="btn-solid magnetic-btn relative mt-4 flex w-full items-center justify-center gap-3 overflow-hidden rounded-xl px-5 py-4 label-mono text-[9px] tracking-[0.18em] disabled:cursor-not-allowed disabled:opacity-50"
+                          className="btn-solid magnetic-btn relative mt-2 flex w-full items-center justify-center gap-3 overflow-hidden rounded-lg px-5 py-3 label-mono text-[9px] tracking-[0.18em] disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           <span className="relative z-10 flex items-center gap-3">
                             {submitting ? "Sending request..." : "Confirm consultation"}
@@ -1465,7 +1512,7 @@ export function BookingModal({ isOpen, onClose }) {
                           </span>
                         </button>
 
-                        <p className="mt-3 text-center text-[7px] leading-5 text-[#07102F]/30">
+                        <p className="mt-1 text-center text-[7px] leading-4 text-[#07102F]/30">
                           Your request is sent to the Raw to Finest team by EmailJS.
                         </p>
                       </div>
@@ -1479,4 +1526,6 @@ export function BookingModal({ isOpen, onClose }) {
       )}
     </AnimatePresence>
   );
+
+  return typeof document !== "undefined" ? createPortal(modal, document.body) : null;
 }

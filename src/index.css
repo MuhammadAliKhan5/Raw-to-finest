@@ -20,11 +20,17 @@
 }
 
 html,
-body
+body,
 #root {
   min-height: 100%;
   background: var(--ink);
   font-family: "Poppins", sans-serif;
+}
+
+html.booking-modal-open,
+html.booking-modal-open body {
+  overflow: hidden !important;
+  overscroll-behavior: none;
 }
 
 button,
