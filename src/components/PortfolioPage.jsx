@@ -3,8 +3,6 @@ import { motion } from "framer-motion";
 import {
   ArrowUpRight,
   Clapperboard,
-  Palette,
-  Pause,
   Play,
   Volume2,
   VolumeX,
@@ -28,13 +26,10 @@ import {
   PageTransition,
   ScrollProgressBar,
   StickyCTA,
-  PROGRAM_LINKS,
 } from "./SiteChrome";
 import GlobalStyles from "./GlobalStyles";
 import { GsapHorizontalScroll, GsapScrollReveal } from "./effects/GsapKit";
-import { Globe as GlobeIcon, Target as TargetIcon } from "lucide-react";
-
-const PROGRAM_ICONS = [Palette, Clapperboard, GlobeIcon, TargetIcon];
+import { Globe as GlobeIcon } from "lucide-react";
 
 const impactStats = [
   ["500+", "PROJECTS DELIVERED"],
@@ -43,101 +38,49 @@ const impactStats = [
   ["48HR", "AVG. TURNAROUND"],
 ];
 
-const graphicDesignItems = [
-  {
-    src: "https://res.cloudinary.com/dc3h8zsv3/image/upload/v1789219179/ccxzqpum4ovpkbnzehcy.png",
-    tag: "SOCIAL POST",
-    title: "HealthStay campaign",
-    aspect: "aspect-[4/5]",
-  },
-  {
-    src: "https://res.cloudinary.com/dc3h8zsv3/image/upload/v1789219657/wumr9zjnqcyqmvxafc08.jpg",
-    tag: "BRAND CONTENT",
-    title: "Feed design system",
-    aspect: "aspect-square",
-  },
-  {
-    src: "https://res.cloudinary.com/dc3h8zsv3/image/upload/v1789219656/xuxxu6azfnzhqmuxnom7.png",
-    tag: "SOCIAL POST",
-    title: "Product spotlight",
-    aspect: "aspect-[4/3]",
-  },
-  {
-    src: "https://res.cloudinary.com/dc3h8zsv3/image/upload/v1789219656/pj8p3flbfy2qgu4ifwjv.jpg",
-    tag: "CAMPAIGN",
-    title: "Launch series",
-    aspect: "aspect-[4/5]",
-  },
-  {
-    src: "https://res.cloudinary.com/dc3h8zsv3/image/upload/v1789219656/mxzgf0jfexapawx5ntek.png",
-    tag: "GRAPHIC",
-    title: "Carousel design",
-    aspect: "aspect-square",
-  },
-  {
-    src: "https://res.cloudinary.com/dc3h8zsv3/image/upload/v1789219655/dbajok9w6q8scytv7lsi.png",
-    tag: "GRAPHIC",
-    title: "Story template",
-    aspect: "aspect-[4/3]",
-  },
+const fullSpreadVideoItems = [
+  { src: "", title: "Featured reel 01", tag: "SELECTED WORK" },
+  { src: "", title: "Featured reel 02", tag: "SELECTED WORK" },
+  { src: "", title: "Featured reel 03", tag: "SELECTED WORK" },
+  { src: "", title: "Featured reel 04", tag: "SELECTED WORK" },
+  { src: "", title: "Featured reel 05", tag: "SELECTED WORK" },
+  { src: "", title: "Featured reel 06", tag: "SELECTED WORK" },
 ];
 
-const videoEditItems = [
-  {
-    src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/q_auto,f_auto,w_720/v1789216207/ednxjhlhnrjzbh3f3kzu.mp4",
-    title: "Brand reel",
-    tag: "SOCIAL EDIT",
-  },
-  {
-    src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/q_auto,f_auto,w_720/v1789216189/sdiszag91gehxzxitzgu.mp4",
-    title: "Campaign cut",
-    tag: "CAMPAIGN",
-  },
-  {
-    src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/q_auto,f_auto,w_720/v1789216202/gsupf1ktfcocucqmxh0g.mp4",
-    title: "Product edit",
-    tag: "PRODUCT CUT",
-  },
-  {
-    src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/q_auto,f_auto,w_720/v1789216205/ckyuminrusxxgyalv7h5.mp4",
-    title: "Founder story",
-    tag: "TALKING HEAD",
-  },
-  {
-    src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/q_auto,f_auto,w_720/v1789216190/kxw2zd1rnd8ksarcjxdy.mp4",
-    title: "Lifestyle reel",
-    tag: "LIFESTYLE",
-  },
-   {
-    src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/q_auto,f_auto,w_720/v1789216208/icnqiktzcyzmcetfnkg7.mp4",
-    title: "Podcast reel",
-    tag: "PODCAST CUT",
-  },
+const carDealershipItems = [
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789648827/k4uxbsntbuoapdxxb6iq.mp4", title: "Dealership campaign 04", tag: "AUTOMOTIVE" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789648821/d3xhqsz5nrw3qqa287on.mp4", title: "Dealership campaign 05", tag: "AUTOMOTIVE" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789648809/xotiojj21jerrvpbnfv7.mp4", title: "Dealership campaign 06", tag: "AUTOMOTIVE" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789648831/tpkhzu9lideqntqsgeym.mp4", title: "Dealership campaign 01", tag: "AUTOMOTIVE" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789648828/ss2njqjwlgpirjcossjk.mp4", title: "Dealership campaign 02", tag: "AUTOMOTIVE" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789648828/pzbujbkdewahhowqjca7.mp4", title: "Dealership campaign 03", tag: "AUTOMOTIVE" }
 ];
 
-const webDesignItems = [
-  { src: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1400&q=88", title: "Aster Studio", tag: "CREATIVE STUDIO", accent: "#80EAFF" },
-  { src: "https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1400&q=88", title: "Northline", tag: "SAAS EXPERIENCE", accent: "#53C8FF" },
-  { src: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1400&q=88", title: "Gather & Grow", tag: "COMMUNITY BRAND", accent: "#71DFFF" },
-  { src: "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=1400&q=88", title: "Atelier No. 08", tag: "EDITORIAL SHOP", accent: "#318DFF" },
-  { src: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=1400&q=88", title: "Forma", tag: "PRODUCT LANDING", accent: "#BCEEFF" },
-  { src: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1400&q=88", title: "Fieldwork", tag: "BUSINESS WEBSITE", accent: "#80EAFF" },
+const realEstateItems = [
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649540/fnb8b6ovd75haqvby950.mp4", title: "Property showcase 02", tag: "REAL ESTATE" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649549/anojo86galbcv9aahvdj.mp4", title: "Property showcase 01", tag: "REAL ESTATE" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649216/ut1fl86sjz3j1qapokza.mp4", title: "Property showcase 06", tag: "REAL ESTATE" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649354/byivnhsqbkptlb2fqxqm.mp4", title: "Property showcase 04", tag: "REAL ESTATE" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649362/l3iqwuayrd2b9sh5rh5u.mp4", title: "Property showcase 03", tag: "REAL ESTATE" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649351/nwu7tprulr9nkvzhmzow.mp4", title: "Property showcase 05", tag: "REAL ESTATE" },
 ];
 
-const heroVisuals = [
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/q_auto,f_auto,w_720/v1789217637/lvuv1paikqi09dxwca1o.mp4", title: "Interface art direction" },
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/q_auto,f_auto,w_720/v1789220566/pxjgac3szzder7yxuaql.mp4", title: "Brand design workspace" },
+const viralReelItems = [
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649936/sezpteqwlrualvq07gzq.mp4", title: "Viral reel 01", tag: "VIRAL-REELS" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649915/etqmhfo7l9yd0k1vupty.mp4", title: "Viral reel 02", tag: "VIRAL-REELS" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649786/dnlqcgclkczhfgcknirl.mp4", title: "Viral reel 03", tag: "VIRAL-REELS" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649742/fwasqtnlrjrvrgevhiih.mp4", title: "Viral reel 04", tag: "VIRAL-REELS" },
 ];
-
-const heroVideos = videoEditItems.slice(0, 2);
 
 const getVideoPoster = (src) =>
   src
+    ? src
     .replace(
       "/video/upload/q_auto,f_auto,w_720/",
       "/video/upload/so_0,q_auto,f_jpg,w_720/"
     )
-    .replace(/\.mp4$/, ".jpg");
+    .replace(/\.mp4$/, ".jpg")
+    : undefined;
 
 function useViewportPlayback(videoRef, threshold = 0.35) {
   useEffect(() => {
@@ -172,91 +115,17 @@ function useViewportPlayback(videoRef, threshold = 0.35) {
   }, [videoRef, threshold]);
 }
 
-function ViewportVideo({ src, label, className = "", interactive = false }) {
-  const videoRef = useRef(null);
-  const [playing, setPlaying] = useState(false);
-  useViewportPlayback(videoRef);
-
-  const toggle = (event) => {
-    if (!interactive) return;
-    event.preventDefault();
-    event.stopPropagation();
-    const video = videoRef.current;
-    if (!video) return;
-    if (video.paused) video.play().catch(() => undefined);
-    else video.pause();
-  };
-
-  return (
-    <div className="relative h-full w-full">
-      <video
-        ref={videoRef}
-        src={src}
-        poster={getVideoPoster(src)}
-        aria-label={label}
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        className={className}
-        onPlay={() => setPlaying(true)}
-        onPause={() => setPlaying(false)}
-      />
-      {interactive && (
-        <button
-          type="button"
-          onClick={toggle}
-          aria-label={`${playing ? "Pause" : "Play"} ${label}`}
-          className="absolute bottom-3 left-3 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/60 text-white backdrop-blur-md"
-        >
-          {playing ? <Pause size={12} fill="currentColor" /> : <Play size={12} fill="currentColor" />}
-        </button>
-      )}
-    </div>
-  );
-}
-
-const fullSpreadVisuals = [
-  {
-    type: "image",
-    src: graphicDesignItems[0].src,
-    alt: "Graphic design campaign work",
-    note: "Identity / campaigns / social",
-    href: "#graphic-design",
-  },
-  {
-    type: "video",
-    src: videoEditItems[1].src,
-    alt: "Video editing showreel preview",
-    note: "Short-form / long-form / ads",
-    href: "#video-edits",
-  },
-  {
-    type: "image",
-    src: webDesignItems[0].src,
-    alt: "Website design workspace",
-    note: "Strategy / UX / development",
-    href: "#web-design",
-  },
-  {
-    type: "image",
-    src: heroVisuals[1].src,
-    alt: "Brand strategy and creative direction workspace",
-    note: "Positioning / systems / direction",
-    href: "/#programs",
-  },
-];
-
-function VideoCard({ item, index = 0 }) {
+function VideoCard({ item, index = 0, aspectClassName = "aspect-[9/16]" }) {
   const videoRef = useRef(null);
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(true);
   const [failed, setFailed] = useState(false);
+  const hasSource = Boolean(item.src);
   useViewportPlayback(videoRef);
 
   const toggle = () => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !hasSource) return;
 
     if (video.paused) {
       video.play()
@@ -301,33 +170,33 @@ function VideoCard({ item, index = 0 }) {
         role="button"
         tabIndex={0}
         aria-label={`${playing ? "Pause" : "Play"} ${item.title}`}
-        className="
+        className={`
           relative
           w-full
-          aspect-[4/5]
+          ${aspectClassName}
           overflow-hidden
           rounded-2xl
           border border-white/10
           bg-black/30
           shadow-xl
           cursor-pointer
-        "
+        `}
       >
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_50%_35%,rgba(168,85,247,.24),transparent_42%),linear-gradient(155deg,#12091b,#030306)]">
           <div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(255,255,255,.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.08)_1px,transparent_1px)] [background-size:24px_24px]" />
           <div className="relative flex flex-col items-center gap-3 text-center">
             <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/[.06] text-[#d8b4fe] backdrop-blur-xl">
-              {failed ? <Clapperboard size={18} /> : <Play size={17} fill="currentColor" />}
+              {!hasSource || failed ? <Clapperboard size={18} /> : <Play size={17} fill="currentColor" />}
             </span>
             <span className="text-[8px] font-semibold uppercase tracking-[.2em] text-white/45">
-              {failed ? "Preview unavailable" : "Play preview"}
+              {!hasSource ? "Add video source" : failed ? "Preview unavailable" : "Play preview"}
             </span>
           </div>
         </div>
 
         <video
           ref={videoRef}
-          src={item.src}
+          src={item.src || undefined}
           poster={getVideoPoster(item.src)}
           aria-label={`${item.title} video preview`}
           className="relative block h-full w-full object-cover"
@@ -361,7 +230,7 @@ function VideoCard({ item, index = 0 }) {
         </div>
 
         {/* Play icon */}
-        {!playing && (
+        {!playing && hasSource && (
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-md">
               <Play size={18} fill="currentColor" />
@@ -405,11 +274,12 @@ export default function PortfolioPage() {
             <div className="hero-orb hero-orb-b" />
             <ParticleField />
 
-            <div className="relative mx-auto grid max-w-[1480px] items-center gap-14 px-5 pb-20 md:px-8 md:pb-28 lg:grid-cols-[1.05fr_.95fr]">
+            <div className="relative mx-auto max-w-[1480px] px-5 pb-20 text-center md:px-8 md:pb-28">
               <motion.div
                 variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
                 initial="hidden"
                 animate="show"
+                className="mx-auto flex max-w-[1050px] flex-col items-center"
               >
                 <RevealItem>
                   <GlassPill>CLIENT RESULTS</GlassPill>
@@ -427,7 +297,7 @@ export default function PortfolioPage() {
                   proud to publish.
                 </RevealItem>
 
-                <RevealItem className="mt-9 flex flex-wrap items-center gap-4">
+                <RevealItem className="mt-9 flex flex-wrap items-center justify-center gap-4">
                   <MagneticButton onClick={openBooking}>
                     Start your project
                     <ArrowUpRight size={14} />
@@ -441,26 +311,7 @@ export default function PortfolioPage() {
                 </RevealItem>
               </motion.div>
 
-              <motion.div initial={{ opacity: 0, x: 90, rotate: 4 }} animate={{ opacity: 1, x: 0, rotate: 0 }} transition={{ duration: 1.05, delay: .2, ease: [0.16, 1, .3, 1] }} className="relative hidden h-[520px] lg:block">
-                {heroVideos.map((item, index) => (
-                  <motion.div
-                    key={item.src}
-                    animate={{ y: [0, index % 2 ? 14 : -12, 0] }}
-                    transition={{ duration: 6 + index, repeat: Infinity, ease: "easeInOut" }}
-                    className={`absolute overflow-hidden rounded-[28px] border border-white/15 bg-white/5 p-2 shadow-[0_35px_90px_rgba(0,0,0,.45)] ${index === 0 ? "left-[8%] top-[4%] h-[360px] w-[270px] -rotate-6" : "right-[2%] top-[16%] h-[330px] w-[245px] rotate-6"}`}
-                  >
-                    <ViewportVideo
-                      src={item.src}
-                      label={`${item.title} portfolio preview`}
-                      interactive
-                      className="h-full w-full rounded-[21px] object-cover"
-                    />
-                  </motion.div>
-                ))}
-                <div className="absolute right-8 top-0 rounded-full border border-white/15 bg-[#201032]/80 px-4 py-2 label-mono text-[8px] uppercase tracking-[.2em] text-white/60 backdrop-blur-xl">Selected work / 2026</div>
-              </motion.div>
-
-              <RevealGroup className="mt-10 grid grid-cols-2 gap-4 border-y border-white/10 py-8 md:grid-cols-4 lg:col-span-2">
+              <RevealGroup className="mx-auto mt-14 grid max-w-[1100px] grid-cols-2 gap-4 border-y border-white/10 py-8 md:grid-cols-4">
                 {impactStats.map(([value, label]) => (
                   <RevealItem key={label}>
                     <CountUp value={value} className="block font-display text-3xl font-bold tracking-[-0.04em] text-white md:text-4xl" />
@@ -489,56 +340,12 @@ export default function PortfolioPage() {
               </Reveal>
             </div>
 
-            <GsapHorizontalScroll trackClassName="gap-6 px-5 md:px-8" speed={0.9}>
-              {PROGRAM_LINKS.slice(0, 3).map(([number, label], index) => {
-                const Icon = PROGRAM_ICONS[index] || Palette;
-                const visual = fullSpreadVisuals[index];
-                return (
-                  <motion.a
-                    key={number}
-                    href={visual.href}
-                    whileHover={{ y: -10 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 24 }}
-                    className="full-spread-card group relative h-[460px] w-[82vw] shrink-0 overflow-hidden rounded-[28px] border border-white/10 bg-[#050307] p-3 text-white sm:w-[430px] md:h-[500px]"
-                  >
-                    <div className="relative h-[64%] overflow-hidden rounded-[20px] border border-white/[.07] bg-[#0a060d]">
-                      {visual.type === "video" ? (
-                        <ViewportVideo
-                          src={visual.src}
-                          label={visual.alt}
-                          className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                        />
-                      ) : (
-                        <img
-                          src={visual.src}
-                          alt={visual.alt}
-                          loading="lazy"
-                          decoding="async"
-                          className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                        />
-                      )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-black/15" />
-                      <span className="absolute left-4 top-4 rounded-full border border-white/15 bg-black/55 px-3 py-2 label-mono text-[9px] tracking-[.18em] text-white/75 backdrop-blur-xl">R2F / {number}</span>
-                      <span className="absolute right-4 top-4 flex h-12 w-12 items-center justify-center rounded-full border border-[#a855f7]/35 bg-black/60 text-[#d8b4fe] shadow-[0_0_28px_rgba(124,58,237,.24)] backdrop-blur-xl transition duration-300 group-hover:rotate-6 group-hover:bg-[#7c3aed] group-hover:text-white">
-                        <Icon size={20} strokeWidth={1.7} />
-                      </span>
-                      <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                        <span className="text-[9px] font-semibold uppercase tracking-[.18em] text-white/70">{visual.note}</span>
-                        {visual.type === "video" && <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-black"><Play size={12} fill="currentColor" /></span>}
-                      </div>
-                    </div>
-                    <div className="flex h-[36%] items-end justify-between gap-5 px-4 pb-5 pt-7 md:px-6">
-                      <div>
-                        <div className="font-display text-3xl font-bold tracking-[-0.04em] text-white md:text-4xl">{label}</div>
-                        <p className="mt-3 max-w-[300px] text-sm leading-6 text-white/65">Raw input, refined into work your audience actually stops for.</p>
-                      </div>
-                      <span className="mb-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/12 text-white/65 transition duration-300 group-hover:border-[#a855f7] group-hover:bg-[#a855f7] group-hover:text-white">
-                        <ArrowUpRight size={17} />
-                      </span>
-                    </div>
-                  </motion.a>
-                );
-              })}
+            <GsapHorizontalScroll trackClassName="gap-5 px-5 md:px-8" speed={0.9}>
+              {fullSpreadVideoItems.map((item, index) => (
+                <div key={item.title} className="w-[72vw] max-w-[290px] shrink-0 sm:w-[280px]">
+                  <VideoCard item={item} index={index} />
+                </div>
+              ))}
             </GsapHorizontalScroll>
             <Divider variant="softwave" fill="#1646D8" />
           </section>
@@ -551,21 +358,18 @@ export default function PortfolioPage() {
                 <div className="mb-4 flex justify-center">
                   <GlassPill dark>
                     <GlobeIcon size={11} className="mr-1 inline -translate-y-px" />
-                    DIGITAL EXPERIENCES
+                    AUTOMOTIVE CONTENT
                   </GlassPill>
                 </div>
-                <h2 className="menu-heading">WEB DESIGN</h2>
-                <p className="mx-auto mt-5 max-w-[560px] text-sm leading-7 text-[#07102F]/50">Conversion-minded websites shaped with clear hierarchy, distinctive art direction and smooth interactions.</p>
+                <h2 className="menu-heading">CAR DEALERSHIPS</h2>
+                <p className="mx-auto mt-5 max-w-[620px] text-sm leading-7 text-[#07102F]/50">High-energy dealership videos that showcase inventory, spotlight key features and turn online attention into showroom visits and qualified enquiries.</p>
               </Reveal>
               <Reveal delay={0.1}>
-                <div className="menu-card relative mx-auto mt-10 max-w-[1080px] overflow-hidden rounded-[30px] border-[3px] border-[#07102F]/15 bg-[#EEF8FF] p-4 shadow-none md:mt-14 md:p-6">
+                <div className="menu-card relative mx-auto mt-10 max-w-[1200px] overflow-hidden rounded-[30px] border-[3px] border-[#07102F]/15 bg-[#EEF8FF] p-4 shadow-none md:mt-14 md:p-6">
                   <RevealGroup className="portfolio-service-grid grid grid-cols-2 gap-4 md:grid-cols-3">
-                    {webDesignItems.map((item, index) => (
-                      <GsapScrollReveal key={item.src} className="h-full" direction={index % 3 === 0 ? "left" : index % 3 === 2 ? "right" : "up"} index={index}>
-                        <motion.article initial={{ opacity: 0, y: 35, scale: .92 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, amount: .15 }} whileHover={{ y: -5 }} transition={{ type: "spring", stiffness: 260, damping: 22, delay: index * .05 }} className="portfolio-service-card group relative flex aspect-[4/5] h-full flex-col overflow-hidden rounded-2xl border-2 border-[#07102F]/10 bg-white p-2 shadow-none">
-                          <div className="min-h-0 flex-1 overflow-hidden rounded-xl"><img src={item.src} alt={`${item.title} web design concept`} loading="lazy" decoding="async" className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]" /></div>
-                          <div className="flex min-h-[64px] items-end justify-between gap-2 px-2 pb-1 pt-3"><div className="min-w-0"><span className="label-mono block truncate text-[7px] tracking-[.18em] text-[var(--violet)]">{item.tag}</span><h3 className="mt-1 truncate font-display text-sm font-bold md:text-base">{item.title}</h3></div><span className="mb-1 h-3 w-3 shrink-0 rounded-full" style={{ background: item.accent }} /></div>
-                        </motion.article>
+                    {carDealershipItems.map((item, index) => (
+                      <GsapScrollReveal key={item.title} className="h-full" direction={index % 3 === 0 ? "left" : index % 3 === 2 ? "right" : "up"} index={index}>
+                        <VideoCard item={item} index={index} aspectClassName="aspect-[5/8]" />
                       </GsapScrollReveal>
                     ))}
                   </RevealGroup>
@@ -589,16 +393,16 @@ export default function PortfolioPage() {
                     THE MAIN COURSE
                   </GlassPill>
                 </div>
-                <h2 className="menu-heading menu-heading-light">VIDEO EDITS</h2>
-                <p className="mx-auto mt-5 max-w-[560px] text-sm leading-7 text-white/50">Story-led edits built for retention, clarity and polished delivery across every major platform.</p>
+                <h2 className="menu-heading menu-heading-light">REAL ESTATE EDITS</h2>
+                <p className="mx-auto mt-5 max-w-[620px] text-sm leading-7 text-white/50">Cinematic property edits that highlight space, lifestyle and location—crafted to hold attention, build desire and generate serious buyer enquiries.</p>
               </Reveal>
 
               <Reveal delay={0.1}>
-                <div className="menu-card relative mx-auto mt-10 max-w-[1080px] overflow-hidden rounded-[30px] border-[3px] border-[#07102F]/15 bg-[#EEF8FF] p-4 shadow-[0_25px_60px_-20px_rgba(0,0,0,.35)] md:mt-14 md:p-6">
+                <div className="menu-card relative mx-auto mt-10 max-w-[1200px] overflow-hidden rounded-[30px] border-[3px] border-[#07102F]/15 bg-[#EEF8FF] p-4 shadow-[0_25px_60px_-20px_rgba(0,0,0,.35)] md:mt-14 md:p-6">
                   <RevealGroup className="portfolio-service-grid grid grid-cols-2 gap-4 md:grid-cols-3">
-                    {videoEditItems.map((item, index) => (
-                      <GsapScrollReveal key={item.src + index} className="h-full" direction={index % 3 === 0 ? "left" : index % 3 === 2 ? "right" : "up"} index={index}>
-                        <VideoCard item={item} index={index} />
+                    {realEstateItems.map((item, index) => (
+                      <GsapScrollReveal key={item.title} className="h-full" direction={index % 3 === 0 ? "left" : index % 3 === 2 ? "right" : "up"} index={index}>
+                        <VideoCard item={item} index={index} aspectClassName="aspect-[5/8]" />
                       </GsapScrollReveal>
                     ))}
                   </RevealGroup>
@@ -623,40 +427,21 @@ export default function PortfolioPage() {
               <Reveal className="text-center">
                 <div className="mb-4 flex justify-center">
                   <GlassPill dark>
-                    <Palette size={11} className="mr-1 inline -translate-y-px" />
-                    THE STARTER
+                    <Clapperboard size={11} className="mr-1 inline -translate-y-px" />
+                    SHORT-FORM CONTENT
                   </GlassPill>
                 </div>
-                <h2 className="menu-heading">GRAPHIC DESIGN</h2>
-                <p className="mx-auto mt-5 max-w-[560px] text-sm leading-7 text-white/50">Consistent campaign visuals shaped to make your brand recognizable across every touchpoint.</p>
+                <h2 className="menu-heading">VIRAL REELS</h2>
+                <p className="mx-auto mt-5 max-w-[620px] text-sm leading-7 text-white/50">Fast-paced vertical edits built around strong hooks, sharp pacing and platform-native storytelling that keeps viewers watching and sharing.</p>
               </Reveal>
 
               <Reveal delay={0.1}>
-                <div className="menu-card relative mx-auto mt-10 max-w-[1080px] overflow-hidden rounded-[30px] border-[3px] border-[#07102F]/15 bg-[#EEF8FF] p-4 shadow-none md:mt-14 md:p-6">
-                  <RevealGroup className="portfolio-service-grid grid grid-cols-2 gap-4 md:grid-cols-3">
-                    {graphicDesignItems.map((item, index) => (
-                      <motion.div
-                        key={item.title + index}
-                        initial={{ opacity: 0, y: 35, scale: .92 }}
-                        whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                        viewport={{ once: true, amount: .15 }}
-                        whileHover={{ y: -5 }}
-                        transition={{ type: "spring", stiffness: 260, damping: 22, delay: index * .05 }}
-                        className="portfolio-service-card group relative aspect-[4/5] overflow-hidden rounded-2xl border-2 border-[#07102F]/10 bg-white shadow-none"
-                      >
-                        <img
-                          src={item.src}
-                          alt={item.title}
-                          loading="lazy"
-                          decoding="async"
-                          className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]"
-                        />
-                        <div className="absolute bottom-2 left-2 right-2 translate-y-2 opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                          <span className="label-mono rounded-full bg-[#5b21b6]/85 px-2 py-1 text-[6.5px] uppercase tracking-[0.16em] text-white">
-                            {item.tag}
-                          </span>
-                        </div>
-                      </motion.div>
+                <div className="menu-card relative mx-auto mt-10 max-w-[1200px] overflow-hidden rounded-[30px] border-[3px] border-[#07102F]/15 bg-[#EEF8FF] p-4 shadow-none md:mt-14 md:p-6">
+                  <RevealGroup className="portfolio-service-grid grid grid-cols-2 gap-4 md:grid-cols-4">
+                    {viralReelItems.map((item, index) => (
+                      <GsapScrollReveal key={item.title} className="h-full" direction={index % 2 === 0 ? "left" : "right"} index={index}>
+                        <VideoCard item={item} index={index} aspectClassName="aspect-[5/8]" />
+                      </GsapScrollReveal>
                     ))}
                   </RevealGroup>
                 </div>
@@ -684,8 +469,8 @@ export default function PortfolioPage() {
                   <span className="gradient-text-hero font-editorial italic">your next project.</span>
                 </h2>
                 <p className="mx-auto mt-6 max-w-[480px] text-sm leading-7 text-white/40">
-                  Book a free call and tell us what's on the menu — graphic
-                  design, video edits, web design, or all three.
+                  Book a free call and tell us what you need—car dealership
+                  content, real estate edits, viral reels, or all three.
                 </p>
                 <div className="mt-9 flex flex-wrap justify-center gap-4">
                   <MagneticButton onClick={openBooking}>

@@ -45,41 +45,40 @@ const portfolioStrip = [
 
 const shortFormPlans = [
   {
-    tier: "Snacks",
-    fit: "Best for small agencies",
-    price: "$1,300",
+    tier: "Basic",
+    fit: "Short-form package",
+    price: "$999",
+    features: [
+      "10x short-form edits",
+      "24\u201348 hour turnaround cycle",
+      "Rolling delivery",
+      "Unlimited within-scope revisions",
+      "Shared editing team",
+      "Expiry: 30 days",
+    ],
+    popular: false,
+  },
+  {
+    tier: "Standard",
+    fit: "Short-form package",
+    price: "$2,999",
     features: [
       "30x short-form edits",
       "24\u201348 hour turnaround cycle",
       "Rolling delivery",
       "Unlimited within-scope revisions",
-      "Shared editing team",
-      "Expiry: 45 days",
-    ],
-    popular: false,
-  },
-  {
-    tier: "Starter",
-    fit: "Best for growing agencies",
-    price: "$3,500",
-    features: [
-      "90x short-form edits",
-      "24\u201348 hour turnaround cycle",
-      "Rolling delivery",
-      "Unlimited within-scope revisions",
-      "Faster revisions",
-      "Priority delivery",
       "Dedicated editing team",
+      "Priority delivery",
       "Expiry: 60 days",
     ],
     popular: true,
   },
   {
-    tier: "Main Course",
-    fit: "Best for high-volume agencies",
-    price: "$5,250",
+    tier: "Premium",
+    fit: "Short-form package",
+    price: "$4,999",
     features: [
-      "150x short-form edits",
+      "50x short-form edits",
       "24\u201348 hour turnaround cycle",
       "Rolling delivery",
       "Unlimited within-scope revisions",
@@ -96,11 +95,11 @@ const shortFormPlans = [
 
 const longFormPlans = [
   {
-    tier: "Snacks",
-    fit: "Best for light publishing schedules",
-    price: "$1,000",
+    tier: "Basic",
+    fit: "Long-form package",
+    price: "$999",
     features: [
-      "5x long-form edits",
+      "3x long-form videos",
       "Duration: 10 to 45 mins",
       "Unlimited within-scope revisions",
       "Faster revisions",
@@ -112,11 +111,11 @@ const longFormPlans = [
     popular: false,
   },
   {
-    tier: "Starter",
-    fit: "Best for weekly publishing",
-    price: "$1,700",
+    tier: "Standard",
+    fit: "Long-form package",
+    price: "$1,499",
     features: [
-      "10x long-form edits",
+      "6x long-form videos",
       "Duration: 10 to 45 mins",
       "Unlimited within-scope revisions",
       "Faster revisions",
@@ -125,14 +124,14 @@ const longFormPlans = [
       "Dedicated support",
       "Expiry: 60 days",
     ],
-    popular: true,
+    popular: false,
   },
   {
-    tier: "Main Course",
-    fit: "Best for high-output channels",
-    price: "$2,000",
+    tier: "Premium",
+    fit: "Long-form package",
+    price: "$2,199",
     features: [
-      "15x long-form edits",
+      "10x long-form videos",
       "Duration: 10 to 45 mins",
       "Unlimited within-scope revisions",
       "Faster revisions",
@@ -180,8 +179,6 @@ function ViewportPortfolioVideo({ item, index }) {
     const syncPlayback = () => {
       window.clearTimeout(playTimer);
       if (visible && !document.hidden) {
-        // A short stagger avoids asking the browser to decode every clip in
-        // the same frame while still making the full fan autoplay together.
         playTimer = window.setTimeout(() => {
           video.play().catch(() => setPlaying(false));
         }, index * 110);
@@ -356,20 +353,20 @@ export default function VideoEditsPage() {
                   <GlassPill>VIDEO EDITING FOR AGENCIES</GlassPill>
                 </RevealItem>
 
-                <GsapClipReveal className="mx-auto mt-7 max-w-[900px]">
+                <GsapClipReveal className="mx-auto mt-7 max-w-[1300px]">
                   <div className="font-display text-[clamp(2.6rem,6.6vw,6.2rem)] font-bold uppercase leading-[0.9] tracking-[-0.05em]">
-                    We cook delicious
+                    TURN RAW FOOTAGE
                     <br />
-                    <span className="gradient-text-hero font-editorial normal-case italic">video edits</span>
+                    INTO
                     <br />
-                    for your agency!
+                    <span className="gradient-text-hero font-editorial italic">CONTENT THAT CONVERTS</span>
                   </div>
                 </GsapClipReveal>
 
                 <RevealItem className="mx-auto mt-7 max-w-[580px] text-sm leading-7 text-white/40 md:text-base">
-                  Faster turnarounds, less back-and-forth, a dedicated team
-                  behind every delivery. Built for agencies that publish
-                  every week, not once a quarter.
+                  High-quality video editing for agencies and businesses that
+                  need consistent content without the hassle of managing an
+                  in-house editing team.
                 </RevealItem>
 
                 <RevealItem className="mt-9 flex flex-wrap items-center justify-center gap-4">
@@ -378,15 +375,13 @@ export default function VideoEditsPage() {
                     <ArrowUpRight size={14} />
                   </MagneticButton>
                   <a
-                    href="#short-form"
+                    href="/portfolio#graphic-design"
                     className="label-mono flex items-center gap-2 rounded-full border border-[var(--orchid)]/30 bg-[#020617]/85 px-6 py-4 uppercase tracking-[0.16em] text-white transition hover:border-[var(--orchid)] hover:bg-[#07133f]"
                   >
-                    See packages
+                    View Our Work
                   </a>
                 </RevealItem>
               </motion.div>
-
-              {/* Original elastic fan pattern, now populated with live R2F portfolio videos. */}
               <motion.div
                 initial={{ opacity: 0, y: 150, scale: .86 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
