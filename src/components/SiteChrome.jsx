@@ -35,9 +35,9 @@ import {
 } from "lucide-react";
 
 
-export const EMAILJS_SERVICE_ID = "service_tkdrnyi";
-export const EMAILJS_TEMPLATE_ID = "template_mxvm5kr";
-export const EMAILJS_PUBLIC_KEY = "5dJmR2nFqVvAY4SRt";
+export const EMAILJS_SERVICE_ID = "service_bjulqic";
+export const EMAILJS_TEMPLATE_ID = "template_r17npqg";
+export const EMAILJS_PUBLIC_KEY = "je6MxlIBwX4DJW7ss";
 
 export const navItems = [
   ["Home", "/"],
@@ -909,7 +909,7 @@ export function Footer({ onBook }) {
               {[
                 { label: "Instagram", href: "https://www.instagram.com/r2fstudios_?stkn=MTA0enQ4Y2F1eWJlNA%3D%3D&utm_source=qr", Icon: FaInstagram },
                 { label: "Facebook", href: "https://www.facebook.com/share/19wQq1eo7b/", Icon: FaFacebookF },
-                { label: "Email", href: "info@r2fstudios.com", Icon: Mail },
+                { label: "Email", href: "mailto:info@r2fstudios.com", Icon: Mail },
               ].map(({ label, href, Icon }) => (
                 <a
                   key={label}
@@ -938,9 +938,13 @@ export function Footer({ onBook }) {
             <div className="label-mono mb-6 tracking-[0.16em] text-[var(--champagne)]">Services</div>
             <div className="flex flex-col gap-4 text-base text-white/68">
               {PROGRAM_LINKS.map(([number, label]) => (
-                <a key={number} href="/#programs" className="footer-link transition hover:text-white">
+                <Link
+                  key={number}
+                  to={label === "Video edits" ? "/video-edits" : "/#programs"}
+                  className="footer-link transition hover:text-white"
+                >
                   {label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
