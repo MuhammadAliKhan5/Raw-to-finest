@@ -39,37 +39,37 @@ const impactStats = [
 ];
 
 const fullSpreadVideoItems = [
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789661081/xcsz6kgh2hwofz9nekem.mp4", title: "Featured reel 01", tag: "SELECTED WORK" },
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789661065/qlku8n8p7gzcea22qfpk.mp4", title: "Featured reel 02", tag: "SELECTED WORK" },
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789661010/q5iduueguwgr5glf5xhi.mp4", title: "Featured reel 03", tag: "SELECTED WORK" },
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789660995/a9zggw8rialsjljmltrr.mp4", title: "Featured reel 04", tag: "SELECTED WORK" },
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649351/nwu7tprulr9nkvzhmzow.mp4", title: "Featured reel 05", tag: "SELECTED WORK" },
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649354/byivnhsqbkptlb2fqxqm.mp4", title: "Featured reel 06", tag: "SELECTED WORK" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789661081/xcsz6kgh2hwofz9nekem.mp4", title: "Featured reel 01" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789661065/qlku8n8p7gzcea22qfpk.mp4", title: "Featured reel 02" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789661010/q5iduueguwgr5glf5xhi.mp4", title: "Featured reel 03" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789660995/a9zggw8rialsjljmltrr.mp4", title: "Featured reel 04" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649351/nwu7tprulr9nkvzhmzow.mp4", title: "Featured reel 05" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649354/byivnhsqbkptlb2fqxqm.mp4", title: "Featured reel 06" },
 ];
 
 const carDealershipItems = [
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789648827/k4uxbsntbuoapdxxb6iq.mp4", title: "Dealership campaign 04", tag: "AUTOMOTIVE" },
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789648821/d3xhqsz5nrw3qqa287on.mp4", title: "Dealership campaign 05", tag: "AUTOMOTIVE" },
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789648809/xotiojj21jerrvpbnfv7.mp4", title: "Dealership campaign 06", tag: "AUTOMOTIVE" },
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789648831/tpkhzu9lideqntqsgeym.mp4", title: "Dealership campaign 01", tag: "AUTOMOTIVE" },
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789648828/ss2njqjwlgpirjcossjk.mp4", title: "Dealership campaign 02", tag: "AUTOMOTIVE" },
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789648828/pzbujbkdewahhowqjca7.mp4", title: "Dealership campaign 03", tag: "AUTOMOTIVE" }
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789648827/k4uxbsntbuoapdxxb6iq.mp4", title: "Dealership campaign 04" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789648821/d3xhqsz5nrw3qqa287on.mp4", title: "Dealership campaign 05" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789648809/xotiojj21jerrvpbnfv7.mp4", title: "Dealership campaign 06" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789648831/tpkhzu9lideqntqsgeym.mp4", title: "Dealership campaign 01" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789648828/ss2njqjwlgpirjcossjk.mp4", title: "Dealership campaign 02" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789648828/pzbujbkdewahhowqjca7.mp4", title: "Dealership campaign 03" }
 ];
 
 const realEstateItems = [
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649540/fnb8b6ovd75haqvby950.mp4", title: "Property showcase 02", tag: "REAL ESTATE" },
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649549/anojo86galbcv9aahvdj.mp4", title: "Property showcase 01", tag: "REAL ESTATE" },
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649216/ut1fl86sjz3j1qapokza.mp4", title: "Property showcase 06", tag: "REAL ESTATE" },
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649354/byivnhsqbkptlb2fqxqm.mp4", title: "Property showcase 04", tag: "REAL ESTATE" },
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649362/l3iqwuayrd2b9sh5rh5u.mp4", title: "Property showcase 03", tag: "REAL ESTATE" },
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649351/nwu7tprulr9nkvzhmzow.mp4", title: "Property showcase 05", tag: "REAL ESTATE" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649540/fnb8b6ovd75haqvby950.mp4", title: "Property showcase 02" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649549/anojo86galbcv9aahvdj.mp4", title: "Property showcase 01" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649216/ut1fl86sjz3j1qapokza.mp4", title: "Property showcase 06" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649354/byivnhsqbkptlb2fqxqm.mp4", title: "Property showcase 04" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649362/l3iqwuayrd2b9sh5rh5u.mp4", title: "Property showcase 03" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649351/nwu7tprulr9nkvzhmzow.mp4", title: "Property showcase 05" },
 ];
 
 const viralReelItems = [
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649936/sezpteqwlrualvq07gzq.mp4", title: "Viral reel 01", tag: "VIRAL-REELS" },
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649915/etqmhfo7l9yd0k1vupty.mp4", title: "Viral reel 02", tag: "VIRAL-REELS" },
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649786/dnlqcgclkczhfgcknirl.mp4", title: "Viral reel 03", tag: "VIRAL-REELS" },
-  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649742/fwasqtnlrjrvrgevhiih.mp4", title: "Viral reel 04", tag: "VIRAL-REELS" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649936/sezpteqwlrualvq07gzq.mp4", title: "Viral reel 01" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649915/etqmhfo7l9yd0k1vupty.mp4", title: "Viral reel 02" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649786/dnlqcgclkczhfgcknirl.mp4", title: "Viral reel 03" },
+  { src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649742/fwasqtnlrjrvrgevhiih.mp4", title: "Viral reel 04" },
 ];
 
 const getVideoPoster = (src) =>

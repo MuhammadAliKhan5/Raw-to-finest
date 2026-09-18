@@ -35,12 +35,12 @@ import GlobalStyles from "./GlobalStyles";
 import { GsapClipReveal, GsapMarquee, GsapScrollReveal } from "./effects/GsapKit";
 
 const portfolioStrip = [
-  { label: "Podcast reel", type: "Short-form edit", src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789217149/yuxlbbv3d9skvnhmnc0c.mp4" },
-  { label: "Brand story", type: "Narrative edit", src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789217146/fduspouexvkzgoamkaez.mp4" },
-  { label: "Founder edit", type: "Personal brand", src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789217143/sd9n2wuhcjtova6adghs.mp4" },
-  { label: "Product cut", type: "Commercial edit", src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789217140/ew9ocyuv0fcfq6upbuqc.mp4" },
-  { label: "Lifestyle reel", type: "Social content", src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789217133/xqnm7il1mygx0ssysdrn.mp4" },
-  { label: "Campaign cut", type: "Performance creative", src: "" },
+  { type: "Short-form edit", src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789217149/yuxlbbv3d9skvnhmnc0c.mp4" },
+  { type: "Narrative edit", src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789217146/fduspouexvkzgoamkaez.mp4" },
+  { type: "Personal brand", src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789217143/sd9n2wuhcjtova6adghs.mp4" },
+  { type: "Commercial edit", src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789217140/ew9ocyuv0fcfq6upbuqc.mp4" },
+  { type: "Social content", src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789217133/xqnm7il1mygx0ssysdrn.mp4" },
+  { type: "Performance creative", src: "https://res.cloudinary.com/dc3h8zsv3/video/upload/v1789649216/ut1fl86sjz3j1qapokza.mp4" },
 ];
 
 const shortFormPlans = [
